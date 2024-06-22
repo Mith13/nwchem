@@ -275,17 +275,17 @@ c
       integer k_q1_offset(6)    ! Offset for q1 integral file
       integer size_q1(6)        ! File size in doubles
       character*4 qfilename(6)  ! File name stub
-      data qfilename/'q1xx','q1yy','q1zz','q1xy','q1xz','q1yz'/
+      data qfilename/'q1xx','q1xy','q1xz','q1yy','q1yz','q1zz'/
       integer d_o1(10)          ! MO octupole integral file
       integer l_o1_offset(10)   ! Offset for o1 integral file
       integer k_o1_offset(10)   ! Offset for o1 integral file
       integer size_o1(10)       ! File size in doubles
       character*5 ofilename(10) ! File name stub
-      data ofilename/'o1xxx','o1yyy','o1zzz','o1xxy','o1xxz',
-     &               'o1yyx','o1yyz','o1zzx','o1zzy','o1xyz'/
+      data ofilename/'o1xxx','o1xxy','o1xxz','o1xyy','o1xyz',
+     &               'o1xzz','o1yyy','o1yyz','o1yzz','o1zzz'/
       character*3 axisname(19)  ! Axis
-      data axisname/'X','Y','Z','XX','YY','ZZ','XY','XZ','YZ',
-     & 'XXX','YYY','ZZZ','XXY','XXZ','YYX','YYZ','ZZX','ZZY','XYZ'/
+      data axisname/'X','Y','Z','XX','XY','XZ','YY','YZ','ZZ',
+     & 'XXX','XXY','XXZ','XYY','XYZ','XZZ','YYY','YYZ','YZZ','ZZZ'/
       double precision debye,buck,octo
       parameter (debye=2.54176568d0)
       parameter (buck=1.344911d0)
@@ -346,30 +346,78 @@ c
 !
 !     CC Response
 !
-      character*5 rr1filename(3) ! File name stub
-      data rr1filename/'rr1x ','rr1y ','rr1z '/
-      character*5 rr2filename(3) ! File name stub
-      data rr2filename/'rr2x ','rr2y ','rr2z '/
-      character*5 rr3filename(3) ! File name stub
-      data rr3filename/'rr3x ','rr3y ','rr3z '/
-      character*5 rr4filename(3) ! File name stub
-      data rr4filename/'rr4x ','rr4y ','rr4z '/
-      character*5 tr1filename(9) ! File name stub
-      data tr1filename/'tr1x+','tr1y+','tr1z+',
-     1                 'tr1x-','tr1y-','tr1z-',
-     2                 'tr1xi','tr1yi','tr1zi'/
-      character*5 tr2filename(9) ! File name stub
-      data tr2filename/'tr2x+','tr2y+','tr2z+',
-     1                 'tr2x-','tr2y-','tr2z-',
-     2                 'tr2xi','tr2yi','tr2zi'/
-      character*5 tr3filename(9) ! File name stub
-      data tr3filename/'tr3x+','tr3y+','tr3z+',
-     1                 'tr3x-','tr3y-','tr3z-',
-     2                 'tr3xi','tr3yi','tr3zi'/
-      character*5 tr4filename(9) ! File name stub
-      data tr4filename/'tr4x ','tr4y ','tr4z ',
-     1                 'tr4x-','tr4y-','tr4z-',
-     2                 'tr4xi','tr4yi','tr4zi'/
+      character*6 rr1filename(19) ! File name stub
+      data rr1filename/'rr1x  ','rr1y  ','rr1z  ',
+     1                 'rr1xx ','rr1xy ','rr1xz ',
+     2                 'rr1yy ','rr1yz ','rr1zz ',
+     3                 'rr1xxx','rr1xxy','rr1xxz','rr1xyy','rr1xyz',
+     4                 'rr1xzz','rr1yyy','rr1yyz','rr1yzz','rr1zzz'/
+      character*6 rr2filename(19) ! File name stub
+      data rr2filename/'rr2x  ','rr2y  ','rr2z  ',
+     1                 'rr2xx ','rr2xy ','rr2xz ',
+     2                 'rr2yy ','rr2yz ','rr2zz ',
+     3                 'rr2xxx','rr2xxy','rr2xxz','rr2xyy','rr2xyz',
+     4                 'rr2xzz','rr2yyy','rr2yyz','rr2yzz','rr2zzz'/
+      character*6 rr3filename(19) ! File name stub
+      data rr3filename/'rr3x  ','rr3y  ','rr3z  ',
+     1                 'rr3xx ','rr3xy ','rr3xz ',
+     2                 'rr3yy ','rr3yz ','rr3zz ',
+     3                 'rr3xxx','rr3xxy','rr3xxz','rr3xyy','rr3xyz',
+     4                 'rr3xzz','rr3yyy','rr3yyz','rr3yzz','rr3zzz'/
+      character*6 rr4filename(19) ! File name stub
+      data rr4filename/'rr4x  ','rr4y  ','rr4z  ',
+     1                 'rr4xx ','rr4xy ','rr4xz ',
+     2                 'rr4yy ','rr4yz ','rr4zz ',
+     3                 'rr4xxx','rr4xxy','rr4xxz','rr4xyy','rr4xyz',
+     4                 'rr4xzz','rr4yyy','rr4yyz','rr4yzz','rr4zzz'/
+      character*7 tr1filename(38) ! File name stub
+      data tr1filename/'tr1x+  ','tr1y+  ','tr1z+  ',
+     1                'tr1x-  ','tr1y-  ','tr1z-  ',
+c     2                'tr1xi  ','tr1yi  ','tr1zi  ',
+     3                'tr1xx+ ','tr1xy+ ','tr1xz+ ',
+     4                'tr1yy+ ','tr1yz+ ','tr1zz+ ',
+     3                'tr1xx- ','tr1xy- ','tr1xz- ',
+     4                'tr1yy- ','tr1yz- ','tr1zz- ',
+     3                'tr1xxx+','tr1xxy+','tr1xxz+','tr1xyy+','tr1xyz+',
+     4                'tr1xzz+','tr1yyy+','tr1yyz+','tr1yzz+','tr1zzz+',
+     3                'tr1xxx-','tr1xxy-','tr1xxz-','tr1xyy-','tr1xyz-',
+     4                'tr1xzz-','tr1yyy-','tr1yyz-','tr1yzz-','tr1zzz-'/
+      character*7 tr2filename(38) ! File name stub
+      data tr2filename/'tr2x+  ','tr2y+  ','tr2z+  ',
+     1                'tr2x-  ','tr2y-  ','tr2z-  ',
+c     2                'tr2xi  ','tr2yi  ','tr2zi  ',
+     3                'tr2xx+ ','tr2xy+ ','tr2xz+ ',
+     4                'tr2yy+ ','tr2yz+ ','tr2zz+ ',
+     3                'tr2xx- ','tr2xy- ','tr2xz- ',
+     4                'tr2yy- ','tr2yz- ','tr2zz- ',
+     3                'tr2xxx+','tr2xxy+','tr2xxz+','tr2xyy+','tr2xyz+',
+     4                'tr2xzz+','tr2yyy+','tr2yyz+','tr2yzz+','tr2zzz+',
+     3                'tr2xxx-','tr2xxy-','tr2xxz-','tr2xyy-','tr2xyz-',
+     4                'tr2xzz-','tr2yyy-','tr2yyz-','tr2yzz-','tr2zzz-'/
+      character*7 tr3filename(38) ! File name stub
+      data tr3filename/'tr3x+  ','tr3y+  ','tr3z+  ',
+     1                'tr3x-  ','tr3y-  ','tr3z-  ',
+c     2                'tr3xi  ','tr3yi  ','tr3zi  ',
+     3                'tr3xx+ ','tr3xy+ ','tr3xz+ ',
+     4                'tr3yy+ ','tr3yz+ ','tr3zz+ ',
+     3                'tr3xx- ','tr3xy- ','tr3xz- ',
+     4                'tr3yy- ','tr3yz- ','tr3zz- ',
+     3                'tr3xxx+','tr3xxy+','tr3xxz+','tr3xyy+','tr3xyz+',
+     4                'tr3xzz+','tr3yyy+','tr3yyz+','tr3yzz+','tr3zzz+',
+     3                'tr3xxx-','tr3xxy-','tr3xxz-','tr3xyy-','tr3xyz-',
+     4                'tr3xzz-','tr3yyy-','tr3yyz-','tr3yzz-','tr3zzz-'/
+      character*7 tr4filename(38) ! File name stub
+      data tr4filename/'tr4x+  ','tr4y+  ','tr4z+  ',
+     1                'tr4x-  ','tr4y-  ','tr4z-  ',
+c     2                'tr4xi  ','tr4yi  ','tr4zi  ',
+     3                'tr4xx+ ','tr4xy+ ','tr4xz+ ',
+     4                'tr4yy+ ','tr4yz+ ','tr4zz+ ',
+     3                'tr4xx- ','tr4xy- ','tr4xz- ',
+     4                'tr4yy- ','tr4yz- ','tr4zz- ',
+     3                'tr4xxx+','tr4xxy+','tr4xxz+','tr4xyy+','tr4xyz+',
+     4                'tr4xzz+','tr4yyy+','tr4yyz+','tr4yzz+','tr4zzz+',
+     3                'tr4xxx-','tr4xxy-','tr4xxz-','tr4xyy-','tr4xyz-',
+     4                'tr4xzz-','tr4yyy-','tr4yyz-','tr4yzz-','tr4zzz-'/
 !
       character*5 yrr1filename(3) ! File name stub
       data yrr1filename/'yrr1x','yrr1y','yrr1z'/
@@ -388,27 +436,30 @@ c
       character*5 yr4filename(6) ! File name stub
       data yr4filename/'yr4x+','yr4y+','yr4z+','yr4x-','yr4y-','yr4z-'/
 !     RESPONSE AMPLITUDES
-      integer d_tr1(6)             ! SF handle for tr1 amplitudes
-      integer l_tr1_offset(3)      ! Offset for tr1 file
-      integer k_tr1_offset(3)      ! Offset for tr1 file
-      integer size_tr1(3)          ! File size in doubles
-      integer d_tr2(6)             ! SF handle for tr2 amplitudes
-      integer l_tr2_offset(3)      ! Offset for tr2 file
-      integer k_tr2_offset(3)      ! Offset for tr2 file
-      integer size_tr2(3)          ! File size in doubles
-      integer d_tr3(6)             ! SF handle for tr3 amplitudes
-      integer l_tr3_offset(3)      ! Offset for tr3 file
-      integer k_tr3_offset(3)      ! Offset for tr3 file
-      integer size_tr3(3)          ! File size in doubles
-      integer d_tr4(6)             ! SF handle for tr4 amplitudes
-      integer l_tr4_offset(3)      ! Offset for tr4 file
-      integer k_tr4_offset(3)      ! Offset for tr4 file
-      integer size_tr4(3)          ! File size in doubles
+      integer d_tr1(38)             ! SF handle for tr1 amplitudes
+      integer l_tr1_offset(19)      ! Offset for tr1 file
+      integer k_tr1_offset(19)      ! Offset for tr1 file
+      integer size_tr1(19)          ! File size in doubles
+      integer d_tr2(38)             ! SF handle for tr2 amplitudes
+      integer l_tr2_offset(19)      ! Offset for tr2 file
+      integer k_tr2_offset(19)      ! Offset for tr2 file
+      integer size_tr2(19)          ! File size in doubles
+      integer d_tr3(38)             ! SF handle for tr3 amplitudes
+      integer l_tr3_offset(19)      ! Offset for tr3 file
+      integer k_tr3_offset(19)      ! Offset for tr3 file
+      integer size_tr3(19)          ! File size in doubles
+      integer d_tr4(38)             ! SF handle for tr4 amplitudes
+      integer l_tr4_offset(19)      ! Offset for tr4 file
+      integer k_tr4_offset(19)      ! Offset for tr4 file
+      integer size_tr4(19)          ! File size in doubles
 !     RESPONSE RESIDUALS
-      integer d_rr1(3)             ! SF handle for rr1 amplitudes
-      integer d_rr2(3)             ! SF handle for rr2 amplitudes
-      integer d_rr3(3)             ! SF handle for rr3 amplitudes
-      integer d_rr4(3)             ! SF handle for rr4 amplitudes
+      integer d_rr1(19)             ! SF handle for rr1 amplitudes
+      integer d_rr2(19)             ! SF handle for rr2 amplitudes
+      integer d_rr3(19)             ! SF handle for rr3 amplitudes
+      integer d_rr4(19)             ! SF handle for rr4 amplitudes
+      integer axis_max              ! number of cartesian compoments (dip=3,dip+quad=9,dip+quad+octo=19)
+      integer neg_offset            ! offset for negative components (dip=0,quad=6,octo=16) + 3 from dip
+      integer pos_offset            ! offset for positive components (dip=0,quad=3,octo=9)
 !     LAMBDA RESPONSE AMPLITUDES
       integer d_yr1(6)             ! SF handle for yr1 amplitudes
       integer l_yr1_offset(3)      ! Offset for yr1 file
@@ -449,6 +500,14 @@ c
       integer l_a0_offset         ! Offset for a0 file
       integer k_a0_offset         ! Offset for a0 file
       integer size_a0             ! File size in doubles
+      integer d_aq0                ! Quadrupole polarizability component handle
+      integer l_aq0_offset         ! Offset for aq0 file
+      integer k_aq0_offset         ! Offset for aq0 file
+      integer size_aq0             ! File size in doubles
+      integer d_ao0                ! Octupole polarizability component handle
+      integer l_ao0_offset         ! Offset for ao0 file
+      integer k_ao0_offset         ! Offset for ao0 file
+      integer size_ao0             ! File size in doubles
       double precision alpha(3,3) ! Dipole polarizability tensor
       double precision alpha1     ! Dipole polarizability term 1
       double precision alpha2     ! Dipole polarizability term 2
@@ -656,6 +715,11 @@ cducc
 !        do i=1,anumfreq
 !          write(LuOut,*) "afreq(",i,") = ",afreq(i)
 !        enddo
+!        do i=1,19
+!            if (multipole.lt.3 .and. i.gt.9 ) continue 
+!            if (multipole.lt.2 .and. i.gt.4 ) continue 
+!            write(LuOut,*) "respaxis(",i,") = ",respaxis(i)
+!        enddo 
 !        write(LuOut,*) "respaxis(1) = ",respaxis(1)
 !        write(LuOut,*) "respaxis(2) = ",respaxis(2)
 !        write(LuOut,*) "respaxis(3) = ",respaxis(3)
@@ -2264,36 +2328,60 @@ c
           endif
         endif
         if (lineresp) then
-          do axis = 1, 3
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          
+          do axis = 1, axis_max
           if (respaxis(axis)) then
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then 
+               pos_offset = 3
+               neg_offset = 6            
+            else if (axis.ge.10) then 
+               pos_offset = 9
+               neg_offset = 16
+            endif
             irrep_x=sym_abelian_axis(geom,axis)
             call sym_irrepname(geom,irrep_x+1,irrepname)
             call tce_x1_offset(l_tr1_offset(axis),k_tr1_offset(axis),
      &           size_tr1(axis))
-            call tce_filename(tr1filename(axis),filename)
-            call createfile(filename,d_tr1(axis),size_tr1(axis))
-            if (read_tr(1)) then
-              call tr1_restart_read(d_tr1(axis),k_tr1_offset(axis),
-     1             size_tr1(axis),axis,handle_tr1(axis),irrep_x)
+
+            !positive omega
+            call tce_filename(tr1filename(axis+pos_offset),filename)
+            call createfile(filename,d_tr1(axis+pos_offset),
+     1                      size_tr1(axis))
+            if (read_tr(1)) then 
+              call tr1_restart_read(d_tr1(axis+pos_offset),
+     1              k_tr1_offset(axis),size_tr1(axis),axis,
+     2              handle_tr1(axis+pos_offset),irrep_x)
             endif
-            call gatoeaf(d_tr1(axis))
-            call tce_filename(tr1filename(axis+3),filename)
-            call createfile(filename,d_tr1(axis+3),
+            call gatoeaf(d_tr1(axis+pos_offset))
+
+            !negative omega
+            call tce_filename(tr1filename(axis+3+neg_offset),filename)
+            call createfile(filename,d_tr1(axis+3+neg_offset),
      &           size_tr1(axis))
             if (read_tr(4+1)) then
-              call tr1_restart_read(d_tr1(axis+3),k_tr1_offset(axis),
-     1          size_tr1(axis),axis+3,handle_tr1(axis+3),irrep_x)
+              call tr1_restart_read(d_tr1(axis+3+neg_offset),
+     1          k_tr1_offset(axis),size_tr1(axis),axis+3+neg_offset,
+     2          handle_tr1(axis+3+neg_offset),irrep_x)
             elseif (read_tr(1)) then
-              call tr1_restart_read(d_tr1(axis+3),k_tr1_offset(axis),
-     1          size_tr1(axis),axis,handle_tr1(axis+3),irrep_x)
+              call tr1_restart_read(d_tr1(axis+3+neg_offset),
+     1           k_tr1_offset(axis),size_tr1(axis),axis+pos_offset,
+     2           handle_tr1(axis+3+neg_offset),irrep_x)
             endif
-            call gatoeaf(d_tr1(axis+3))
-            if (nodezero.and.util_print('tr1',print_debug)) then
+            endif
+            call gatoeaf(d_tr1(axis+3+neg_offset))
+
+            if ((nodezero.and.util_print('tr1',print_debug)).or. .true.)
+     1             then
               write(LuOut,*)
               write(LuOut,9440) axisname(axis),irrepname
               write(LuOut,9000) 'tr1',size_tr1(axis)
-              write(LuOut,9090) 'tr1',d_tr1(axis)
-              write(LuOut,9090) 'tr1',d_tr1(axis+3)
+              write(LuOut,9090) 'tr1',d_tr1(axis+pos_offset)
+              write(LuOut,9090) 'tr1',d_tr1(axis+3+neg_offset)
               call util_flush(LuOut)
             endif
           endif
@@ -2439,36 +2527,58 @@ c
 !--        endif
 !--       endif !---
         if (lineresp) then
-          do axis = 1, 3
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          do axis = 1, axis_max
           if (respaxis(axis)) then
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then 
+               pos_offset = 3
+               neg_offset = 6            
+            else if (axis.ge.10) then 
+               pos_offset = 9
+               neg_offset = 16
+            endif
             irrep_x=sym_abelian_axis(geom,axis)
             call sym_irrepname(geom,irrep_x+1,irrepname)
             call tce_x2_offset(l_tr2_offset(axis),k_tr2_offset(axis),
      &           size_tr2(axis))
-            call tce_filename(tr2filename(axis),filename)
-            call createfile(filename,d_tr2(axis),size_tr2(axis))
-            if (read_tr(2)) then
-              call tr2_restart_read(d_tr2(axis),k_tr2_offset(axis),
-     1          size_tr2(axis),axis,handle_tr2(axis),irrep_x)
+            ! positive omega
+            call tce_filename(tr2filename(axis+pos_offset),filename)
+            call createfile(filename,d_tr2(axis+pos_offset),
+     1                      size_tr2(axis))
+            if (read_tr(2)) then 
+              call tr2_restart_read(d_tr2(axis+pos_offset),
+     1          k_tr2_offset(axis),size_tr2(axis),axis+pos_offset,
+     2          handle_tr2(axis+pos_offset),irrep_x)
             endif
-            call gatoeaf(d_tr2(axis))
-            call tce_filename(tr2filename(axis+3),filename)
-            call createfile(filename,d_tr2(axis+3),
+            call gatoeaf(d_tr2(axis+pos_offset))
+
+            ! negative omega
+            call tce_filename(tr2filename(axis+3+neg_offset),filename)
+            call createfile(filename,d_tr2(axis+3+neg_offset),
      &           size_tr2(axis))
             if (read_tr(4+2)) then
-              call tr2_restart_read(d_tr2(axis+3),k_tr2_offset(axis),
-     1          size_tr2(axis),axis+3,handle_tr2(axis+3),irrep_x)
+              call tr2_restart_read(d_tr2(axis+3+neg_offset),
+     1          k_tr2_offset(axis),size_tr2(axis),axis+3+neg_offset,
+     2          handle_tr2(axis+3),irrep_x)
             elseif (read_tr(2)) then
-              call tr2_restart_read(d_tr2(axis+3),k_tr2_offset(axis),
-     1          size_tr2(axis),axis,handle_tr2(axis+3),irrep_x)
+              call tr2_restart_read(d_tr2(axis+3+neg_offset),
+     1          k_tr2_offset(axis),size_tr2(axis),axis+pos_offset,
+     2          handle_tr2(axis+3+neg_offset),irrep_x)
             endif
-            call gatoeaf(d_tr2(axis+3))
+            endif
+
+            call gatoeaf(d_tr2(axis+3+neg_offset))
+
             if (nodezero.and.util_print('tr2',print_debug)) then
               write(LuOut,*)
               write(LuOut,9440) axisname(axis),irrepname
-              write(LuOut,9000) 'tr2',size_tr1(axis)
-              write(LuOut,9090) 'tr2',d_tr1(axis)
-              write(LuOut,9090) 'tr2',d_tr1(axis+3)
+              write(LuOut,9000) 'tr2',size_tr2(axis)
+              write(LuOut,9090) 'tr2',d_tr2(axis+pos_offset)
+              write(LuOut,9090) 'tr2',d_tr2(axis+3+neg_offset)
               call util_flush(LuOut)
             endif
           endif
@@ -2536,29 +2646,53 @@ c
           call gatoeaf(d_lambda3)
         endif
         if (lineresp) then
-          do axis = 1, 3
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+
+          do axis = 1, axis_max
           if (respaxis(axis)) then
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then
+               pos_offset = 3
+               neg_offset = 6
+            else if (axis.ge.10) then
+               pos_offset = 9
+               neg_offset = 16
+            endif
+
             irrep_x=sym_abelian_axis(geom,axis)
             call tce_x3_offset(l_tr3_offset(axis),k_tr3_offset(axis),
      &           size_tr3(axis))
-            call tce_filename(tr3filename(axis),filename)
-            call createfile(filename,d_tr3(axis),size_tr3(axis))
-            if (read_tr(3)) then
-              call tr3_restart_read(d_tr3(axis),k_tr3_offset(axis),
-     1          size_tr3(axis),axis,handle_tr3(axis),irrep_x)
+            ! positive omega
+            call tce_filename(tr3filename(axis+pos_offset),filename)
+            call createfile(filename,d_tr3(axis+pos_offset),
+     1                      size_tr3(axis))
+            if (read_tr(3)) then 
+              call tr3_restart_read(d_tr3(axis+pos_offset),
+     1          k_tr3_offset(axis),size_tr3(axis),axis+pos_offset,
+     2          handle_tr3(axis+pos_offset),irrep_x)
             endif
-            call gatoeaf(d_tr3(axis))
-            call tce_filename(tr3filename(axis+3),filename)
-            call createfile(filename,d_tr3(axis+3),
+            call gatoeaf(d_tr3(axis+pos_offset))
+
+            ! negative omega
+            call tce_filename(tr3filename(axis+3+neg_offset),filename)
+            call createfile(filename,d_tr3(axis+3+neg_offset),
      &           size_tr3(axis))
-            if (read_tr(4+3)) then
-              call tr3_restart_read(d_tr3(axis+3),k_tr3_offset(axis),
-     1          size_tr3(axis),axis+3,handle_tr3(axis+3),irrep_x)
+            if (axis.lt.4) then !skip restart for quad and oct for now
+            if (read_tr(4+3)) then 
+              call tr3_restart_read(d_tr3(axis+3+neg_offset),
+     1          k_tr3_offset(axis),size_tr3(axis),axis+3+neg_offset,
+     2           handle_tr3(axis+3+neg_offset),irrep_x)
             elseif (read_tr(3)) then
-              call tr3_restart_read(d_tr3(axis+3),k_tr3_offset(axis),
-     1          size_tr3(axis),axis,handle_tr3(axis+3),irrep_x)
+              call tr3_restart_read(d_tr3(axis+3+neg_offset),
+     1          k_tr3_offset(axis),size_tr3(axis),axis+pos_offset,
+     2          handle_tr3(axis+3+neg_offset),irrep_x)
             endif
-            call gatoeaf(d_tr3(axis+3))
+            endif
+            call gatoeaf(d_tr3(axis+3+neg_offset))
+
           endif
           enddo ! axis
         endif ! lineresp
@@ -2644,29 +2778,47 @@ c
           call gatoeaf(d_lambda4)
         endif
         if (lineresp) then
-          do axis = 1, 3
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          do axis = 1, axis_max
           if (respaxis(axis)) then
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then
+               pos_offset = 3
+               neg_offset = 6
+            else if (axis.ge.10) then
+               pos_offset = 9
+               neg_offset = 16
+            endif
             irrep_x=sym_abelian_axis(geom,axis)
             call tce_x4_offset(l_tr4_offset(axis),k_tr4_offset(axis),
      &           size_tr4(axis))
-            call tce_filename(tr4filename(axis),filename)
-            call createfile(filename,d_tr4(axis),size_tr4(axis))
-            if (read_tr(4)) then
-              call tr4_restart_read(d_tr4(axis),k_tr4_offset(axis),
-     1          size_tr4(axis),axis,handle_tr4(axis),irrep_x)
+            ! positive omega
+            call tce_filename(tr4filename(axis+pos_offset),filename)
+            call createfile(filename,d_tr4(axis+pos_offset),
+     1                      size_tr4(axis))
+            if (read_tr(4)) then 
+              call tr4_restart_read(d_tr4(axis+pos_offset),
+     1          k_tr4_offset(axis),size_tr4(axis),axis+pos_offset,
+     2          handle_tr4(axis+pos_offset),irrep_x)
             endif
-            call gatoeaf(d_tr4(axis))
-            call tce_filename(tr4filename(axis+3),filename)
-            call createfile(filename,d_tr4(axis+3),
+            call gatoeaf(d_tr4(axis+pos_offset))
+            call tce_filename(tr4filename(axis+3+neg_offset),filename)
+            call createfile(filename,d_tr4(axis+3+neg_offset),
      &           size_tr4(axis))
             if (read_tr(4+4)) then
-              call tr4_restart_read(d_tr4(axis+3),k_tr4_offset(axis),
-     1          size_tr4(axis),axis+3,handle_tr4(axis+3),irrep_x)
+              call tr4_restart_read(d_tr4(axis+3+neg_offset),
+     1          k_tr4_offset(axis),size_tr4(axis),axis+3+neg_offset,
+     2          handle_tr4(axis+3+neg_offset),irrep_x)
             elseif (read_tr(4)) then
-              call tr4_restart_read(d_tr4(axis+3),k_tr4_offset(axis),
-     1          size_tr4(axis),axis,handle_tr4(axis+3),irrep_x)
+              call tr4_restart_read(d_tr4(axis+3+neg_offset),
+     1          k_tr4_offset(axis),size_tr4(axis),axis+pos_offset,
+     2          handle_tr4(axis+3+neg_offset),irrep_x)
             endif
-            call gatoeaf(d_tr4(axis+3))
+            endif
+            call gatoeaf(d_tr4(axis+3+neg_offset))
           endif
           enddo ! axis
         endif ! lineresp
@@ -2705,6 +2857,12 @@ c
       endif
       if (lineresp) then
         call tce_e_offset(l_a0_offset,k_a0_offset,size_a0)
+        if (multipole.gt.1) then
+          call tce_e_offset(l_aq0_offset,k_aq0_offset,size_aq0)
+        endif
+        if (multipole.gt.2) then
+          call tce_e_offset(l_ao0_offset,k_ao0_offset,size_ao0)
+        endif
       endif
       if (leftresp) then
         call tce_e_offset(l_b0_offset,k_b0_offset,size_b0)
@@ -3306,13 +3464,36 @@ c
         call errquit('CCSDLR not compiled (tce_energy.F)',0,CAPMIS_ERR)
 #else
           ! no need to pass d_a0 as argument here
+          if (nodezero) write(LuOut,*) 'CCSDLR, dipole',d_a0
           call ccsd_lr_alpha(rtdb,d_d0,d_a0,d_f1,d_v2,d_d1,
      1         d_t1,d_t2,d_lambda1,d_lambda2,d_tr1,d_tr2,
      2         k_d0_offset,k_a0_offset,
      3         k_f1_offset,k_v2_offset,k_d1_offset,
      4         k_t1_offset,k_t2_offset,k_l1_offset,k_l2_offset,
      5         k_tr1_offset,k_tr2_offset,
-     6         size_tr1,size_tr2,dipole_scf,dipole_cor)
+     6         size_tr1,size_tr2,dipole_scf,dipole_cor,1)
+
+          if (multipole.gt.1) then
+            if (nodezero) write(LuOut,*) 'CCSDLR, quadrupole',d_aq0
+            call ccsd_lr_alpha(rtdb,d_q0,d_aq0,d_f1,d_v2,d_q1,
+     1         d_t1,d_t2,d_lambda1,d_lambda2,d_tr1,d_tr2,
+     2         k_q0_offset,k_aq0_offset,
+     3         k_f1_offset,k_v2_offset,k_q1_offset,
+     4         k_t1_offset,k_t2_offset,k_l1_offset,k_l2_offset,
+     5         k_tr1_offset,k_tr2_offset,
+     6         size_tr1,size_tr2,quadrupole_scf,quadrupole_cor,2)
+          endif
+
+          if (multipole.gt.2) then
+            if (nodezero) write(LuOut,*) 'CCSDLR, octupole',d_ao0
+            call ccsd_lr_alpha(rtdb,d_o0,d_aq0,d_f1,d_v2,d_o1,
+     1         d_t1,d_t2,d_lambda1,d_lambda2,d_tr1,d_tr2,
+     2         k_o0_offset,k_ao0_offset,
+     3         k_f1_offset,k_v2_offset,k_o1_offset,
+     4         k_t1_offset,k_t2_offset,k_l1_offset,k_l2_offset,
+     5         k_tr1_offset,k_tr2_offset,
+     6         size_tr1,size_tr2,octupole_scf,octupole_cor,3)
+          endif
 #endif
         endif ! lineresp
 ! -------------
@@ -4174,6 +4355,54 @@ c Tsource
      2                    dipole_cor(2),dipole_cor(2)*debye,
      3                    dipole_cor(3),dipole_cor(3)*debye,
      4                    dipole_cor_t ,dipole_cor_t*debye
+            if (multipole.gt.1) then
+                do axis=1,6
+                  irrep_d=sym_abelian_axis(geom,axis+3)
+                  call tce_filename('q0',filename)
+                  call createfile(filename,d_q0,size_q0)
+                  call ccsdt_density1(d_q1(axis),d_q0,d_t1,d_t2,d_t3,
+     1              d_lambda1,d_lambda2,d_lambda3,k_q1_offset(axis),
+     2              k_q0_offset,k_t1_offset,k_t2_offset,k_t3_offset,
+     3              k_l1_offset,k_l2_offset,k_l3_offset)
+                  call reconcilefile(d_q0,size_q0)
+                  call get_block(d_q0,cquadrupole,1,0)
+                  quadrupole_cor(axis)=quadrupole_scf(axis)+cquadrupole
+                  call deletefile(d_q0)
+                enddo
+                if (nodezero) write(LuOut,9432) "CCSDT","second",
+     1                    quadrupole_cor(1),quadrupole_cor(1)*buck,
+     2                    quadrupole_cor(2),quadrupole_cor(2)*buck,
+     3                    quadrupole_cor(3),quadrupole_cor(3)*buck,
+     3                    quadrupole_cor(4),quadrupole_cor(4)*buck,
+     3                    quadrupole_cor(5),quadrupole_cor(5)*buck,
+     3                    quadrupole_cor(6),quadrupole_cor(6)*buck
+            endif
+                if (multipole.gt.2) then
+                do axis=1,10
+                  irrep_d=sym_abelian_axis(geom,axis+9)
+                  call tce_filename('o0',filename)
+                  call createfile(filename,d_o0,size_o0)
+                  call ccsdt_density1(d_o1(axis),d_o0,d_t1,d_t2,d_t3,
+     1              d_lambda1,d_lambda2,d_lambda3,k_o1_offset(axis),
+     2              k_o0_offset,k_t1_offset,k_t2_offset,k_t3_offset,
+     3              k_l1_offset,k_l2_offset,k_l3_offset)
+                  call reconcilefile(d_o0,size_o0)
+                  call get_block(d_o0,coctupole,1,0)
+                  octupole_cor(axis)=octupole_scf(axis)+coctupole
+                  call deletefile(d_o0)
+                enddo
+                if (nodezero) write(LuOut,9433) "CCSDT","third",
+     1                    octupole_cor(1),octupole_cor(1)*octo,
+     2                    octupole_cor(2),octupole_cor(2)*octo,
+     3                    octupole_cor(3),octupole_cor(3)*octo,
+     3                    octupole_cor(4),octupole_cor(4)*octo,
+     3                    octupole_cor(5),octupole_cor(5)*octo,
+     3                    octupole_cor(6),octupole_cor(6)*octo,
+     3                    octupole_cor(7),octupole_cor(7)*octo,
+     3                    octupole_cor(8),octupole_cor(8)*octo,
+     3                    octupole_cor(9),octupole_cor(9)*octo,
+     3                    octupole_cor(10),octupole_cor(10)*octo
+            endif
 !cc            goto 2010
             goto 2337
           endif
@@ -4242,329 +4471,42 @@ c Tsource
 #if !defined(CCSDTLR)
       CALL ERRQUIT('CCSDTLR not compiled (tce_energy.F)',0,CAPMIS_ERR)
 #else
-!          if (nodezero) write(LuOut,*) "lineresp is go"
-          do omegacount=1,anumfreq
-!            if (nodezero) write(LuOut,*) "omegacount is go"
-            omega = afreq(omegacount)
-            if (omega.eq.(0.0d0)) then
-              dynfreq = 1
-            else
-              dynfreq = 2
-            endif
-!
-          do axis = 1, 3
-!            if (nodezero) write(LuOut,*) "axis is go"
-          if (respaxis(axis)) then
-!            if (nodezero) write(LuOut,*) "respaxis(axis) is go"
-            irrep_d=sym_abelian_axis(geom,axis)
-            call sym_irrepname(geom,irrep_d+1,irrepname)
-            if (nodezero.and.util_print('mod1',print_default)) then
-              write(LuOut,*)
-              write(LuOut,9440) axisname(axis),irrepname
-            endif
-            irrep_o=irrep_d
-            irrep_x=irrep_d
-!
-          do omegasign=1,dynfreq
-!            if (nodezero) write(LuOut,*) "omegasign is go"
-            if (omegasign.eq.1) then
-              omega = (1.0d0)*afreq(omegacount)
-              dynaxis = 0
-            elseif (omegasign.eq.2) then
-              omega = (-1.0d0)*afreq(omegacount)
-              dynaxis = 3
-            endif
-            if (nodezero) write(LuOut,9431) omega
-!            if (nodezero) write(LuOut,*) "omega = ",omega
-!            if (nodezero) write(LuOut,*) "dynaxis = ",dynaxis
-!
-            call tce_diis_init()
-            do iter=1,maxiter
-              cpu=-util_cpusec()
-              wall=-util_wallsec()
-              if (nodezero.and.(iter.eq.1))
-     &          write(LuOut,9400) "CCSDT-LR"
-!
-              call tce_filename(rr1filename(axis),filename)
-              call createfile(filename,d_rr1(axis),size_tr1(axis))
-              call tce_zero(d_rr1(axis),size_tr1(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega,d_tr1(axis+dynaxis),
-     1             d_rr1(axis),size_tr1(axis))
-!        write(LuOut,*) "eomccsdt_x1"
-              call eomccsdt_x1(d_f1,d_rr1(axis),d_t1,d_t2,d_v2,
-     1             d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),k_f1_offset,k_tr1_offset(axis),
-     3             k_t1_offset,k_t2_offset,k_v2_offset,
-     4             k_tr1_offset(axis),k_tr2_offset(axis),
-     5             k_tr3_offset(axis))
-!        write(LuOut,*) "ccsdt_o1"
-              call ccsdt_o1(d_rr1(axis),d_d1(axis),d_t1,d_t2,
-     &             k_tr1_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset)
-!
-              call tce_filename(rr2filename(axis),filename)
-              call createfile(filename,d_rr2(axis),size_tr2(axis))
-              call tce_zero(d_rr2(axis),size_tr2(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega,d_tr2(axis+dynaxis),
-     1             d_rr2(axis),size_tr2(axis))
-!        write(LuOut,*) "eomccsdt_x2"
-              call eomccsdt_x2(d_f1,d_rr2(axis),d_t1,d_t2,d_t3,d_v2,
-     1             d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),k_f1_offset,k_tr2_offset(axis),
-     3             k_t1_offset,k_t2_offset,k_t3_offset,k_v2_offset,
-     4             k_tr1_offset(axis),k_tr2_offset(axis),
-     5             k_tr3_offset(axis))
-!        write(LuOut,*) "ccsdt_o2"
-              call ccsdt_o2(d_rr2(axis),d_d1(axis),d_t1,d_t2,d_t3,
-     &             k_tr2_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset,k_t3_offset)
-!
-              call tce_filename(rr3filename(axis),filename)
-              call createfile(filename,d_rr3(axis),size_tr3(axis))
-              call tce_zero(d_rr3(axis),size_tr3(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega,d_tr3(axis+dynaxis),
-     1             d_rr3(axis),size_tr3(axis))
-!        write(LuOut,*) "eomccsdt_x3"
-              call eomccsdt_x3(d_f1,d_rr3(axis),d_t1,d_t2,d_t3,d_v2,
-     1             d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),k_f1_offset,k_tr3_offset(axis),
-     3             k_t1_offset,k_t2_offset,k_t3_offset,k_v2_offset,
-     4             k_tr1_offset(axis),k_tr2_offset(axis),
-     5             k_tr3_offset(axis))
-!        write(LuOut,*) "ccsdt_o3"
-              call ccsdt_o3(d_rr3(axis),d_d1(axis),d_t1,d_t2,d_t3,
-     &             k_tr3_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset,k_t3_offset)
-!
-!        write(LuOut,*) "reconcilefile"
-              call reconcilefile(d_rr1(axis),size_tr1(axis))
-              call reconcilefile(d_rr2(axis),size_tr2(axis))
-              call reconcilefile(d_rr3(axis),size_tr3(axis))
-!        write(LuOut,*) "tce_residual_tr1"
-              call tce_residual_tr1(d_rr1(axis),k_tr1_offset(axis),rr1)
-!        write(LuOut,*) "tce_residual_tr2"
-              call tce_residual_tr2(d_rr2(axis),k_tr2_offset(axis),rr2)
-!        write(LuOut,*) "tce_residual_tr3"
-              call tce_residual_tr3(d_rr3(axis),k_tr3_offset(axis),rr3)
-              residual = max(rr1,rr2,rr3)
-              cpu=cpu+util_cpusec()
-              wall=wall+util_wallsec()
-              if (nodezero) write(LuOut,9420) iter,residual,cpu,wall
-              if (residual .lt. thresh) then
-                if (nodezero) then
-                  write(LuOut,9410)
-                endif
-                if (ampnorms) then
-                  call tce_residual_tr1(d_tr1(axis+dynaxis),
-     1                                  k_tr1_offset(axis),rr1)
-                  call tce_residual_tr2(d_tr2(axis+dynaxis),
-     1                                  k_tr2_offset(axis),rr2)
-                  call tce_residual_tr3(d_tr3(axis+dynaxis),
-     1                                  k_tr3_offset(axis),rr3)
-                  if (nodezero) then
-                    write(LuOut,9082) "T(1) singles",rr1
-                    write(LuOut,9082) "T(1) doubles",rr2
-                    write(LuOut,9082) "T(1) triples",rr3
-                  endif
-                endif
-                call deletefile(d_rr3(axis))
-                call deletefile(d_rr2(axis))
-                call deletefile(d_rr1(axis))
-                call tce_diis_tidy()
-                if (save_tr(1)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T1(1) now...'
-                  endif
-                  call tr1_restart_save(d_tr1(axis+dynaxis),
-     1                 k_tr1_offset(axis),size_tr1(axis),
-     2                 axis+dynaxis,handle_tr1(axis),irrep_x)
-                endif
-                if (save_tr(2)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T2(1) now...'
-                  endif
-                  call tr2_restart_save(d_tr2(axis+dynaxis),
-     1                 k_tr2_offset(axis),size_tr2(axis),
-     2                 axis+dynaxis,handle_tr2(axis),irrep_x)
-                endif
-                if (save_tr(3)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T3(1) now...'
-                  endif
-                  call tr3_restart_save(d_tr3(axis),k_tr3_offset(axis),
-     1                 size_tr3(axis),axis,handle_tr3(axis),irrep_x)
-                endif
-                goto 2338
-              endif
-              if (save_tr(1).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T1(1) now...'
-                endif
-                call tr1_restart_save(d_tr1(axis+dynaxis),
-     1               k_tr1_offset(axis),size_tr1(axis),
-     2               axis+dynaxis,handle_tr1(axis),irrep_x)
-              endif
-              if (save_tr(2).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T2(1) now...'
-                endif
-                call tr2_restart_save(d_tr2(axis+dynaxis),
-     1               k_tr2_offset(axis),size_tr2(axis),
-     2               axis+dynaxis,handle_tr2(axis),irrep_x)
-              endif
-              if (save_tr(3).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T3(1) now...'
-                endif
-                call tr3_restart_save(d_tr3(axis),k_tr3_offset(axis),
-     1               size_tr3(axis),axis,handle_tr3(axis),irrep_x)
-              endif
-              call tce_diis2(.false.,iter,.true.,.true.,.true.,.false.,
-     1             d_rr1(axis),d_tr1(axis+dynaxis),k_tr1_offset(axis),
-     2             size_tr1(axis),
-     3             d_rr2(axis),d_tr2(axis+dynaxis),k_tr2_offset(axis),
-     4             size_tr2(axis),
-     5             d_rr3(axis),d_tr3(axis+dynaxis),k_tr3_offset(axis),
-     6             size_tr3(axis),
-     6             dummy,dummy,dummy,dummy,omega)
-              call deletefile(d_rr3(axis))
-              call deletefile(d_rr2(axis))
-              call deletefile(d_rr1(axis))
-              if (nodezero) call util_flush(LuOut)
-            enddo ! iter loop
-          call errquit('tce_energy: maxiter exceeded',iter,CALC_ERR)
- 2338 continue
-!
-          enddo ! omegasign loop
-          endif ! respaxis(axis)
-          enddo ! axis loop
-!
-!         Evaluate Dipole Polarizability
-!
-          do axisA = 1, 3
-          do axisB = 1, axisA
-          alpha(axisA,axisB)=0.0d0
-          if (respaxis(axisA).and.respaxis(axisB)) then
-            irrep_a=sym_abelian_axis(geom,axisA)
-            irrep_b=sym_abelian_axis(geom,axisB)
-            irrep_y=irrep_g
-!
-!            if (nodezero) write(LuOut,*) "axisA = ",axisA
-!            if (nodezero) write(LuOut,*) "axisB = ",axisB
-!
-            call tce_filename('a0',filename)
-            call createfile(filename,d_a0,size_a0)
-!
-              alpha1=0.0d0
-              alpha2=0.0d0
-!
-              if (omega.ne.0.0d0) then
-                dynaxis = 3
-              else
-                dynaxis = 0
-              endif
-!
-              irrep_c=irrep_a
-              irrep_oa=irrep_a
-              irrep_ob=irrep_b
-!              if (nodezero) write(LuOut,*) "ccsdt_lr_alpha_offdiag #1"
-              call ccsdt_lr_alpha_offdiag(d_tr1(axisA),
-     1             d_tr2(axisA),d_tr3(axisA),
-     2             d_tr1(axisB+dynaxis),d_tr2(axisB+dynaxis),
-     3             d_tr3(axisB+dynaxis),d_tr1(axisA),
-     4             d_tr2(axisA),d_tr3(axisA),
-     5             d_f1,d_a0,d_d1(axisA),d_d1(axisB),d_t1,d_t2,d_t3,
-     6             d_v2,d_lambda1,d_lambda2,d_lambda3,
-     7             k_tr1_offset(axisA),k_tr2_offset(axisA),
-     8             k_tr3_offset(axisA),k_tr1_offset(axisB),
-     9             k_tr2_offset(axisB),k_tr3_offset(axisB),
-     1             k_tr1_offset(axisA),k_tr2_offset(axisA),
-     2             k_tr3_offset(axisA),k_f1_offset,k_a0_offset,
-     3             k_d1_offset(axisA),k_d1_offset(axisB),
-     4             k_t1_offset,k_t2_offset,k_t3_offset,
-     5             k_v2_offset,k_l1_offset,k_l2_offset,k_l3_offset)
-!
-              call reconcilefile(d_a0,size_a0)
-              call get_block(d_a0,alpha1,1,0)
-              call tce_zero(d_a0,size_a0)
-!              write(LuOut,*) "alpha1 = ",alpha1
-!
-              if ((omega.eq.0.0d0).or.(axisA.eq.axisB)) then
-                alpha2=alpha1
-              else
-!                if (nodezero) write(LuOut,*) "ccsdt_lr_alpha_offdiag #2"
-                call ccsdt_lr_alpha_offdiag(d_tr1(axisA+dynaxis),
-     1               d_tr2(axisA+dynaxis),d_tr3(axisA+dynaxis),
-     2               d_tr1(axisB),d_tr2(axisB),
-     3               d_tr3(axisB),d_tr1(axisA+dynaxis),
-     4               d_tr2(axisA+dynaxis),d_tr3(axisA+dynaxis),
-     5               d_f1,d_a0,d_d1(axisA),d_d1(axisB),d_t1,d_t2,d_t3,
-     6               d_v2,d_lambda1,d_lambda2,d_lambda3,
-     7               k_tr1_offset(axisA),k_tr2_offset(axisA),
-     8               k_tr3_offset(axisA),k_tr1_offset(axisB),
-     9               k_tr2_offset(axisB),k_tr3_offset(axisB),
-     1               k_tr1_offset(axisA),k_tr2_offset(axisA),
-     2               k_tr3_offset(axisA),k_f1_offset,k_a0_offset,
-     3               k_d1_offset(axisA),k_d1_offset(axisB),
-     4               k_t1_offset,k_t2_offset,k_t3_offset,
-     5               k_v2_offset,k_l1_offset,k_l2_offset,k_l3_offset)
-!
-                call reconcilefile(d_a0,size_a0)
-                call get_block(d_a0,alpha2,1,0)
-                call tce_zero(d_a0,size_a0)
-              endif ! axisA.eq.axisB
-!              write(LuOut,*) "alpha2 = ",alpha2
-!
-              alpha(axisA,axisB)=(-0.5d0)*(alpha1+alpha2)
-!
-            call deletefile(d_a0)
-!
-!            write(LuOut,*) "alpha(axisA,axisB) = ",alpha(axisA,axisB)
-!            if (nodezero) write(LuOut,9020) cpu, wall
-!
-          endif ! respaxis(axis)
-          enddo ! axisB loop
-          enddo ! axisA loop
-          cpu=cpu+util_cpusec()
-          wall=wall+util_wallsec()
-!
-          do i = 1, 3
-            do j = 1, i
-              alphacopy(i,j)=alpha(i,j)
-              alphacopy(j,i)=alpha(i,j)
-            enddo
-          enddo
-!
-          call hnd_diag(alphacopy,alphaevr,3,.false.,.false.)
-!
-          alphaiso = (alphaevr(1)+alphaevr(2)+alphaevr(3))/3.0d0
-          alphaani = (alphaevr(1)-alphaevr(2))*(alphaevr(1)-alphaevr(2))
-     1             + (alphaevr(1)-alphaevr(3))*(alphaevr(1)-alphaevr(3))
-     2             + (alphaevr(2)-alphaevr(3))*(alphaevr(2)-alphaevr(3))
-          alphaani = dsqrt(0.5d0*alphaani)
-!
-          if ((.not.(respaxis(1).and.respaxis(2).and.respaxis(3)))
-     1        .and.nodezero) write(LuOut,9911)
-!
-          if (nodezero) write(LuOut,9434) "CCSDT Linear Response",
-     1      afreq(omegacount),auXnm/afreq(omegacount),
-     2      alpha(1,1),alpha(2,1),alpha(3,1),
-     3      au2ang3*alpha(1,1),au2ang3*alpha(2,1),au2ang3*alpha(3,1),
-     4      alpha(2,1),alpha(2,2),alpha(3,2),
-     5      au2ang3*alpha(2,1),au2ang3*alpha(2,2),au2ang3*alpha(3,2),
-     6      alpha(3,1),alpha(3,2),alpha(3,3),
-     7      au2ang3*alpha(3,1),au2ang3*alpha(3,2),au2ang3*alpha(3,3),
-     8      alphaevr(1),alphaevr(2),alphaevr(3),
-     9      au2ang3*alphaevr(1),au2ang3*alphaevr(2),au2ang3*alphaevr(3),
-     1      alphaiso,au2ang3*alphaiso,
-     2      alphaani,au2ang3*alphaani
-          if (nodezero) write(LuOut,9020) cpu, wall
-          call util_flush(LuOut)
-!
-          enddo ! omegacount loop
+! it would be better to move it to separate file similar to ccsd_lr_alpha.F
+! first start with dipole stuff
+         if (nodezero) write(LuOut,*) 'CCSDTLR, dipole',d_a0
+         call ccsdt_lr_alpha(rtdb,d_d0,d_a0,d_f1,d_v2,d_d1,
+     1           d_t1,d_t2,d_t3,d_lambda1,d_lambda2,d_lambda3,
+     1           d_tr1,d_tr2,d_tr3,
+     2           k_d0_offset,k_a0_offset,k_f1_offset,k_v2_offset,
+     3           k_d1_offset,
+     4           k_t1_offset,k_t2_offset,k_t3_offset,
+     5           k_l1_offset,k_l2_offset,k_l3_offset,
+     6           k_tr1_offset,k_tr2_offset,k_tr3_offset,
+     7           size_tr1,size_tr2,size_tr3,size_a0,1)
+          if (multipole.gt.1) then
+            if (nodezero) write(LuOut,*) 'CCSDTLR, quadrupole',d_aq0
+              call ccsdt_lr_alpha(rtdb,d_q0,d_aq0,d_f1,d_v2,d_q1,
+     1           d_t1,d_t2,d_t3,d_lambda1,d_lambda2,d_lambda3,
+     1           d_tr1,d_tr2,d_tr3,
+     2           k_q0_offset,k_aq0_offset,k_f1_offset,k_v2_offset,
+     3           k_q1_offset,
+     4           k_t1_offset,k_t2_offset,k_t3_offset,
+     5           k_l1_offset,k_l2_offset,k_l3_offset,
+     6           k_tr1_offset,k_tr2_offset,k_tr3_offset,
+     7           size_tr1,size_tr2,size_tr3,size_aq0,2)
+          endif
+          if (multipole.gt.2) then
+            if (nodezero) write(LuOut,*) 'CCSDTLR, octupole',d_ao0
+              call ccsdt_lr_alpha(rtdb,d_o0,d_ao0,d_f1,d_v2,d_o1,
+     1           d_t1,d_t2,d_t3,d_lambda1,d_lambda2,d_lambda3,
+     1           d_tr1,d_tr2,d_tr3,
+     2           k_o0_offset,k_ao0_offset,k_f1_offset,k_v2_offset,
+     3           k_o1_offset,
+     4           k_t1_offset,k_t2_offset,k_t3_offset,
+     5           k_l1_offset,k_l2_offset,k_l3_offset,
+     6           k_tr1_offset,k_tr2_offset,k_tr3_offset,
+     7           size_tr1,size_tr2,size_tr3,size_ao0,3)
+          endif
 !
 #endif
         endif ! lineresp
@@ -5526,377 +5468,43 @@ c Tsource
  2437   continue
         if (lineresp) then
 !
-!          if (nodezero) write(LuOut,*) "lineresp is go"
-          do omegacount=1,anumfreq
-!            if (nodezero) write(LuOut,*) "omegacount is go"
-            omega1 = afreq(omegacount)
-            if (omega1.eq.(0.0d0)) then
-              dynfreq = 1
-            else
-              dynfreq = 2
-            endif
-!
-          do axis = 1, 3
-!            if (nodezero) write(LuOut,*) "axis is go"
-          if (respaxis(axis)) then
-!            if (nodezero) write(LuOut,*) "respaxis(axis) is go"
-            irrep_d=sym_abelian_axis(geom,axis)
-            call sym_irrepname(geom,irrep_d+1,irrepname)
-            if (nodezero.and.util_print('mod1',print_default)) then
-              write(LuOut,*)
-              write(LuOut,9440) axisname(axis),irrepname
-            endif
-            irrep_o=irrep_d
-            irrep_x=irrep_d
-!
-          do omegasign=1,dynfreq
-!            if (nodezero) write(LuOut,*) "omegasign is go"
-            if (omegasign.eq.1) then
-              omega1 = (1.0d0)*afreq(omegacount)
-              dynaxis = 0
-            elseif (omegasign.eq.2) then
-              omega1 = (-1.0d0)*afreq(omegacount)
-              dynaxis = 3
-            endif
-            if (nodezero) write(LuOut,9431) omega1
-!            if (nodezero) write(LuOut,*) "omega1 = ",omega1
-!            if (nodezero) write(LuOut,*) "dynaxis = ",dynaxis
-!
-            call tce_diis_init()
-            do iter=1,maxiter
-              cpu=-util_cpusec()
-              wall=-util_wallsec()
-              if (nodezero.and.(iter.eq.1))
-     &          write(LuOut,9400) "CCSDTQ-LR"
-!
-              call tce_filename(rr1filename(axis),filename)
-              call createfile(filename,d_rr1(axis),size_tr1(axis))
-              call tce_zero(d_rr1(axis),size_tr1(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega1,d_tr1(axis+dynaxis),
-     1             d_rr1(axis),size_tr1(axis))
-!        write(LuOut,*) "eomccsdtq_x1"
-              call eomccsdtq_x1(d_f1,d_rr1(axis),d_t1,d_t2,d_v2,
-     1             d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),k_f1_offset,
-     3             k_tr1_offset(axis),
-     4             k_t1_offset,k_t2_offset,k_v2_offset,
-     5             k_tr1_offset(axis),k_tr2_offset(axis),
-     6             k_tr3_offset(axis))
-!        write(LuOut,*) "ccsdtq1_o1"
-              call ccsdtq_o1(d_rr1(axis),d_d1(axis),d_t1,d_t2,
-     &             k_tr1_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset)
-!
-              call tce_filename(rr2filename(axis),filename)
-              call createfile(filename,d_rr2(axis),size_tr2(axis))
-              call tce_zero(d_rr2(axis),size_tr2(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega1,d_tr2(axis+dynaxis),
-     1             d_rr2(axis),size_tr2(axis))
-!        write(LuOut,*) "eomccsdtq_x2"
-              call eomccsdtq_x2(d_f1,d_rr2(axis),d_t1,d_t2,d_t3,d_v2,
-     1             d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),d_tr4(axis+dynaxis),
-     3             k_f1_offset,k_tr2_offset(axis),
-     4             k_t1_offset,k_t2_offset,k_t3_offset,k_v2_offset,
-     5             k_tr1_offset(axis),k_tr2_offset(axis),
-     6             k_tr3_offset(axis),k_tr4_offset(axis))
-!        write(LuOut,*) "ccsdtq_o2"
-              call ccsdtq_o2(d_rr2(axis),d_d1(axis),d_t1,d_t2,d_t3,
-     &             k_tr2_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset,k_t3_offset)
-!
-              call tce_filename(rr3filename(axis),filename)
-              call createfile(filename,d_rr3(axis),size_tr3(axis))
-              call tce_zero(d_rr3(axis),size_tr3(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega1,d_tr3(axis+dynaxis),
-     1             d_rr3(axis),size_tr3(axis))
-!        write(LuOut,*) "eomccsdtq_x3"
-              call eomccsdtq_x3(d_f1,d_rr3(axis),d_t1,d_t2,d_t3,d_t4,
-     1             d_v2,d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),d_tr4(axis+dynaxis),
-     3             k_f1_offset,k_tr3_offset(axis),
-     4             k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset,
-     5             k_v2_offset,
-     6             k_tr1_offset(axis),k_tr2_offset(axis),
-     7             k_tr3_offset(axis),k_tr4_offset(axis))
-!        write(LuOut,*) "ccsdtq_o3"
-              call ccsdtq_o3(d_rr3(axis),d_d1(axis),d_t1,d_t2,d_t3,d_t4,
-     &             k_tr3_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset)
-!
-              call tce_filename(rr4filename(axis),filename)
-              call createfile(filename,d_rr4(axis),size_tr4(axis))
-              call tce_zero(d_rr4(axis),size_tr4(axis))
-!        write(LuOut,*) "daxpyfile"
-              call daxpyfile(1,(-1.0d0)*omega1,d_tr4(axis+dynaxis),
-     1             d_rr4(axis),size_tr4(axis))
-!        write(LuOut,*) "eomccsdtq_x4"
-              call eomccsdtq_x4(d_f1,d_rr4(axis),d_t1,d_t2,d_t3,d_t4,
-     1             d_v2,d_tr1(axis+dynaxis),d_tr2(axis+dynaxis),
-     2             d_tr3(axis+dynaxis),d_tr4(axis+dynaxis),
-     3             k_f1_offset,k_tr4_offset(axis),
-     4             k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset,
-     5             k_v2_offset,
-     6             k_tr1_offset(axis),k_tr2_offset(axis),
-     7             k_tr3_offset(axis),k_tr4_offset(axis))
-!        write(LuOut,*) "ccsdtq_o4"
-              call ccsdtq_o4(d_rr4(axis),d_d1(axis),d_t1,d_t2,d_t3,d_t4,
-     &             k_tr4_offset(axis),k_d1_offset(axis),
-     &             k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset)
-!
-!        write(LuOut,*) "reconcilefile"
-              call reconcilefile(d_rr1(axis),size_tr1(axis))
-              call reconcilefile(d_rr2(axis),size_tr2(axis))
-              call reconcilefile(d_rr3(axis),size_tr3(axis))
-              call reconcilefile(d_rr4(axis),size_tr4(axis))
-!        write(LuOut,*) "tce_residual_tr1"
-              call tce_residual_tr1(d_rr1(axis),k_tr1_offset(axis),rr1)
-!        write(LuOut,*) "tce_residual_tr2"
-              call tce_residual_tr2(d_rr2(axis),k_tr2_offset(axis),rr2)
-!        write(LuOut,*) "tce_residual_tr3"
-              call tce_residual_tr3(d_rr3(axis),k_tr3_offset(axis),rr3)
-!        write(LuOut,*) "tce_residual_tr4"
-              call tce_residual_tr4(d_rr4(axis),k_tr4_offset(axis),rr4)
-              residual = max(rr1,rr2,rr3,rr4)
-              cpu=cpu+util_cpusec()
-              wall=wall+util_wallsec()
-              if (nodezero) write(LuOut,9420) iter,residual,cpu,wall
-              if (residual .lt. thresh) then
-                if (nodezero) then
-                  write(LuOut,9410)
-                endif
-                if (ampnorms) then
-                  call tce_residual_tr1(d_tr1(axis+dynaxis),
-     1                                  k_tr1_offset(axis),rr1)
-                  call tce_residual_tr2(d_tr2(axis+dynaxis),
-     1                                  k_tr2_offset(axis),rr2)
-                  call tce_residual_tr3(d_tr3(axis+dynaxis),
-     1                                  k_tr3_offset(axis),rr3)
-                  call tce_residual_tr4(d_tr4(axis+dynaxis),
-     1                                  k_tr4_offset(axis),rr4)
-                  if (nodezero) then
-                    write(LuOut,9082) "T(1) singles",rr1
-                    write(LuOut,9082) "T(1) doubles",rr2
-                    write(LuOut,9082) "T(1) triples",rr3
-                    write(LuOut,9082) "T(1) quadruples",r4
-                  endif
-                endif
-
-                call deletefile(d_rr4(axis))
-                call deletefile(d_rr3(axis))
-                call deletefile(d_rr2(axis))
-                call deletefile(d_rr1(axis))
-                call tce_diis_tidy()
-                if (save_tr(1)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T1(1) now...'
-                  endif
-                  call tr1_restart_save(d_tr1(axis+dynaxis),
-     1                 k_tr1_offset(axis),size_tr1(axis),
-     2                 axis+dynaxis,handle_tr1(axis),irrep_x)
-                endif
-                if (save_tr(2)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T2(1) now...'
-                  endif
-                  call tr2_restart_save(d_tr2(axis+dynaxis),
-     1                 k_tr2_offset(axis),size_tr2(axis),
-     2                 axis+dynaxis,handle_tr2(axis),irrep_x)
-                endif
-                if (save_tr(3)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T3(1) now...'
-                  endif
-                  call tr3_restart_save(d_tr3(axis),k_tr3_offset(axis),
-     1                 size_tr3(axis),axis,handle_tr3(axis),irrep_x)
-                endif
-                if (save_tr(4)) then
-                  if(nodezero) then
-                    write(LuOut,*) 'Saving T4(1) now...'
-                  endif
-                  call tr4_restart_save(d_tr4(axis),k_tr4_offset(axis),
-     1                 size_tr4(axis),axis,handle_tr4(axis),irrep_x)
-                endif
-                goto 2438
-              endif
-              if (save_tr(1).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T1(1) now...'
-                endif
-                call tr1_restart_save(d_tr1(axis+dynaxis),
-     1               k_tr1_offset(axis),size_tr1(axis),
-     2               axis+dynaxis,handle_tr1(axis),irrep_x)
-              endif
-              if (save_tr(2).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T2(1) now...'
-                endif
-                call tr2_restart_save(d_tr2(axis+dynaxis),
-     1               k_tr2_offset(axis),size_tr2(axis),
-     2               axis+dynaxis,handle_tr2(axis),irrep_x)
-              endif
-              if (save_tr(3).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T3(1) now...'
-                endif
-                call tr3_restart_save(d_tr3(axis),k_tr3_offset(axis),
-     1               size_tr3(axis),axis,handle_tr3(axis),irrep_x)
-              endif
-              if (save_tr(4).and.(mod(iter,save_interval).eq.0)) then
-                if(nodezero) then
-                  write(LuOut,*) 'Saving T4(1) now...'
-                endif
-                call tr4_restart_save(d_tr4(axis),k_tr4_offset(axis),
-     1               size_tr4(axis),axis,handle_tr4(axis),irrep_x)
-              endif
-              call tce_diis2(.false.,iter,.true.,.true.,.true.,.true.,
-     1             d_rr1(axis),d_tr1(axis+dynaxis),k_tr1_offset(axis),
-     2             size_tr1(axis),
-     3             d_rr2(axis),d_tr2(axis+dynaxis),k_tr2_offset(axis),
-     4             size_tr2(axis),
-     5             d_rr3(axis),d_tr3(axis+dynaxis),k_tr3_offset(axis),
-     6             size_tr3(axis),
-     7             d_rr4(axis),d_tr4(axis+dynaxis),k_tr4_offset(axis),
-     8             size_tr4(axis),omega)
-              call deletefile(d_rr4(axis))
-              call deletefile(d_rr3(axis))
-              call deletefile(d_rr2(axis))
-              call deletefile(d_rr1(axis))
-              if (nodezero) call util_flush(LuOut)
-            enddo ! iter loop
-          call errquit('tce_energy: maxiter exceeded',iter,CALC_ERR)
- 2438 continue
-!
-          enddo ! omegasign loop
-          endif ! respaxis(axis)
-          enddo ! axis loop
-!
-!         Evaluate Dipole Polarizability
-!
-          do axisA = 1, 3
-          do axisB = 1, axisA
-          alpha(axisA,axisB)=0.0d0
-          if (respaxis(axisA).and.respaxis(axisB)) then
-            irrep_a=sym_abelian_axis(geom,axisA)
-            irrep_b=sym_abelian_axis(geom,axisB)
-            irrep_y=irrep_g
-!
-!            if (nodezero) write(LuOut,*) "axisA = ",axisA
-!            if (nodezero) write(LuOut,*) "axisB = ",axisB
-!
-            call tce_filename('a0',filename)
-            call createfile(filename,d_a0,size_a0)
-!
-              alpha1=0.0d0
-              alpha2=0.0d0
-!
-              if (omega1.ne.0.0d0) then
-                dynaxis = 3
-              else
-                dynaxis = 0
-              endif
-!
-              irrep_c=irrep_a
-              irrep_oa=irrep_a
-              irrep_ob=irrep_b
-              irrep_tra=irrep_a
-              irrep_trb=irrep_b
-!              if (nodezero) write(LuOut,*) "ccsdtq_lr_alpha"
-              call ccsdtq_lr_alpha(d_f1,d_a0,d_d1(axisA),d_d1(axisB),
-     1             d_t1,d_t2,d_t3,d_t4,
-     2             d_tr1(axisA+dynaxis),d_tr2(axisA+dynaxis),
-     3             d_tr3(axisA+dynaxis),d_tr4(axisA+dynaxis),
-     4             d_tr1(axisB),d_tr2(axisB),d_tr3(axisB),d_tr4(axisB),
-     5             d_v2,d_lambda1,d_lambda2,d_lambda3,d_lambda4,
-     6             k_f1_offset,k_a0_offset,k_d1_offset(axisA),
-     7             k_d1_offset(axisB),k_t1_offset,k_t2_offset,
-     8             k_t3_offset,k_t4_offset,k_tr1_offset(axisA),
-     9             k_tr2_offset(axisA),k_tr3_offset(axisA),
-     1             k_tr4_offset(axisA),k_tr1_offset(axisB),
-     2             k_tr2_offset(axisB),k_tr3_offset(axisB),
-     3             k_tr4_offset(axisB),k_v2_offset,k_l1_offset,
-     4             k_l2_offset,k_l3_offset,k_l4_offset)
-!
-              call reconcilefile(d_a0,size_a0)
-              call get_block(d_a0,alpha1,1,0)
-              call tce_zero(d_a0,size_a0)
-!              write(LuOut,*) "alpha1 = ",alpha1
-!
-              if (omega1.eq.0.0d0) then
-                alpha2=alpha1
-              else
-!                if (nodezero) write(LuOut,*) "ccsdtq_lr_alpha"
-                call ccsdtq_lr_alpha(d_f1,d_a0,d_d1(axisA),d_d1(axisB),
-     1             d_t1,d_t2,d_t3,d_t4,
-     2             d_tr1(axisA),d_tr2(axisA),d_tr3(axisA),d_tr4(axisA),
-     3             d_tr1(axisB+dynaxis),d_tr2(axisB+dynaxis),
-     4             d_tr3(axisB+dynaxis),d_tr4(axisB+dynaxis),
-     5             d_v2,d_lambda1,d_lambda2,d_lambda3,d_lambda4,
-     6             k_f1_offset,k_a0_offset,k_d1_offset(axisA),
-     7             k_d1_offset(axisB),k_t1_offset,k_t2_offset,
-     8             k_t3_offset,k_t4_offset,k_tr1_offset(axisA),
-     9             k_tr2_offset(axisA),k_tr3_offset(axisA),
-     1             k_tr4_offset(axisA),k_tr1_offset(axisB),
-     2             k_tr2_offset(axisB),k_tr3_offset(axisB),
-     3             k_tr4_offset(axisB),k_v2_offset,k_l1_offset,
-     4             k_l2_offset,k_l3_offset,k_l4_offset)
-!
-                call reconcilefile(d_a0,size_a0)
-                call get_block(d_a0,alpha2,1,0)
-                call tce_zero(d_a0,size_a0)
-              endif ! axisA.eq.axisB
-!              write(LuOut,*) "alpha2 = ",alpha2
-!
-              alpha(axisA,axisB)=(-0.5d0)*(alpha1+alpha2)
-!
-            call deletefile(d_a0)
-!
-!            write(LuOut,*) "alpha(axisA,axisB) = ",alpha(axisA,axisB)
-!            if (nodezero) write(LuOut,9020) cpu, wall
-!
-          endif ! respaxis(axis)
-          enddo ! axisB loop
-          enddo ! axisA loop
-          cpu=cpu+util_cpusec()
-          wall=wall+util_wallsec()
-!
-          do i = 1, 3
-            do j = 1, i
-              alphacopy(i,j)=alpha(i,j)
-              alphacopy(j,i)=alpha(i,j)
-            enddo
-          enddo
-!
-          call hnd_diag(alphacopy,alphaevr,3,.false.,.false.)
-!
-          alphaiso = (alphaevr(1)+alphaevr(2)+alphaevr(3))/3.0d0
-          alphaani = (alphaevr(1)-alphaevr(2))*(alphaevr(1)-alphaevr(2))
-     1             + (alphaevr(1)-alphaevr(3))*(alphaevr(1)-alphaevr(3))
-     2             + (alphaevr(2)-alphaevr(3))*(alphaevr(2)-alphaevr(3))
-          alphaani = dsqrt(0.5d0*alphaani)
-!
-          if ((.not.(respaxis(1).and.respaxis(2).and.respaxis(3)))
-     1        .and.nodezero) write(LuOut,9911)
-!
-          if (nodezero) write(LuOut,9434) "CCSDTQ Linear Response",
-     1      afreq(omegacount),auXnm/afreq(omegacount),
-     2      alpha(1,1),alpha(2,1),alpha(3,1),
-     3      au2ang3*alpha(1,1),au2ang3*alpha(2,1),au2ang3*alpha(3,1),
-     4      alpha(2,1),alpha(2,2),alpha(3,2),
-     5      au2ang3*alpha(2,1),au2ang3*alpha(2,2),au2ang3*alpha(3,2),
-     6      alpha(3,1),alpha(3,2),alpha(3,3),
-     7      au2ang3*alpha(3,1),au2ang3*alpha(3,2),au2ang3*alpha(3,3),
-     8      alphaevr(1),alphaevr(2),alphaevr(3),
-     9      au2ang3*alphaevr(1),au2ang3*alphaevr(2),au2ang3*alphaevr(3),
-     1      alphaiso,au2ang3*alphaiso,
-     2      alphaani,au2ang3*alphaani
-          if (nodezero) write(LuOut,9020) cpu, wall
-          call util_flush(LuOut)
-!
-          enddo ! omegacount loop
+         if (nodezero) write(LuOut,*) 'CCSDTQLR, dipole',d_a0
+           call  ccsdtq_lr_alpha_run(rtdb,d_d0,d_a0,d_f1,d_v2,d_d1,
+     1           d_t1,d_t2,d_t3,d_t4,
+     1           d_lambda1,d_lambda2,d_lambda3,d_lambda4,
+     1           d_tr1,d_tr2,d_tr3,d_tr4,
+     2           k_d0_offset,k_a0_offset,k_f1_offset,k_v2_offset,
+     3           k_d1_offset,
+     4           k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset,
+     5           k_l1_offset,k_l2_offset,k_l3_offset,k_l4_offset,
+     6           k_tr1_offset,k_tr2_offset,k_tr3_offset,k_tr4_offset,
+     7           size_tr1,size_tr2,size_tr3,size_tr4,size_a0,1)
+          if (multipole.gt.1) then
+            if (nodezero) write(LuOut,*) 'CCSDTQLR, quadrupole',d_aq0
+           call  ccsdtq_lr_alpha_run(rtdb,d_q0,d_aq0,d_f1,d_v2,d_q1,
+     1           d_t1,d_t2,d_t3,d_t4,
+     1           d_lambda1,d_lambda2,d_lambda3,d_lambda4,
+     1           d_tr1,d_tr2,d_tr3,d_tr4,
+     2           k_q0_offset,k_aq0_offset,k_f1_offset,k_v2_offset,
+     3           k_q1_offset,
+     4           k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset,
+     5           k_l1_offset,k_l2_offset,k_l3_offset,k_l4_offset,
+     6           k_tr1_offset,k_tr2_offset,k_tr3_offset,k_tr4_offset,
+     7           size_tr1,size_tr2,size_tr3,size_tr4,size_a0,2)
+          endif
+          if (multipole.gt.2) then
+            if (nodezero) write(LuOut,*) 'CCSDTQLR, octupole',d_ao0
+           call  ccsdtq_lr_alpha_run(rtdb,d_o0,d_ao0,d_f1,d_v2,d_o1,
+     1           d_t1,d_t2,d_t3,d_t4,
+     1           d_lambda1,d_lambda2,d_lambda3,d_lambda4,
+     1           d_tr1,d_tr2,d_tr3,d_tr4,
+     2           k_o0_offset,k_ao0_offset,k_f1_offset,k_v2_offset,
+     3           k_o1_offset,
+     4           k_t1_offset,k_t2_offset,k_t3_offset,k_t4_offset,
+     5           k_l1_offset,k_l2_offset,k_l3_offset,k_l4_offset,
+     6           k_tr1_offset,k_tr2_offset,k_tr3_offset,k_tr4_offset,
+     7           size_tr1,size_tr2,size_tr3,size_tr4,size_a0,3)
+          endif
 !
         endif ! lineresp
 !
@@ -6767,6 +6375,14 @@ c Tsource
      1    call errquit("tce_energy: MA problem",25,MA_ERR)
       endif
       if (lineresp) then
+        if (multipole.gt.2) then
+          if (.not.ma_pop_stack(l_ao0_offset))
+     1      call errquit("tce_energy: MA problem",262,MA_ERR)
+        endif
+        if (multipole.gt.1) then
+          if (.not.ma_pop_stack(l_aq0_offset))
+     1      call errquit("tce_energy: MA problem",261,MA_ERR)
+        endif
         if (.not.ma_pop_stack(l_a0_offset))
      1    call errquit("tce_energy: MA problem",26,MA_ERR)
       endif
@@ -10888,10 +10504,22 @@ c
           enddo ! axis
         endif ! leftresp
         if (lineresp) then
-          do axis = 3, 1, -1
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          do axis = axis_max, 1, -1
           if (respaxis(axis)) then
-            call deletefile(d_tr4(axis))
-            call deletefile(d_tr4(axis+3))
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then
+               pos_offset = 3
+               neg_offset = 6
+            else if (axis.ge.10) then
+               pos_offset = 9
+               neg_offset = 16
+            endif
+            call deletefile(d_tr4(axis+pos_offset))
+            call deletefile(d_tr4(axis+3+neg_offset))
             if (.not.ma_pop_stack(l_tr4_offset(axis)))
      1        call errquit("tce_energy: MA problem",89,MA_ERR)
           endif
@@ -10918,10 +10546,22 @@ c
           enddo ! axis
         endif ! leftresp
         if (lineresp) then
-          do axis = 3, 1, -1
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          do axis = axis_max, 1, -1
           if (respaxis(axis)) then
-            call deletefile(d_tr3(axis))
-            call deletefile(d_tr3(axis+3))
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then
+               pos_offset = 3
+               neg_offset = 6
+            else if (axis.ge.10) then
+               pos_offset = 9
+               neg_offset = 16
+            endif
+            call deletefile(d_tr3(axis+pos_offset))
+            call deletefile(d_tr3(axis+3+neg_offset))
             if (.not.ma_pop_stack(l_tr3_offset(axis)))
      1        call errquit("tce_energy: MA problem",88,MA_ERR)
           endif
@@ -10958,10 +10598,22 @@ c
           enddo ! axis
         endif ! leftresp
         if (lineresp) then
-          do axis = 3, 1, -1
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          do axis = axis_max, 1, -1
           if (respaxis(axis)) then
-            call deletefile(d_tr2(axis))
-            call deletefile(d_tr2(axis+3))
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then
+               pos_offset = 3
+               neg_offset = 6
+            else if (axis.ge.10) then
+               pos_offset = 9
+               neg_offset = 16
+            endif
+            call deletefile(d_tr2(axis+pos_offset))
+            call deletefile(d_tr2(axis+3+neg_offset))
             if (.not.ma_pop_stack(l_tr2_offset(axis)))
      1        call errquit("tce_energy: MA problem",87,MA_ERR)
           endif
@@ -10988,10 +10640,22 @@ c
           enddo ! axis
         endif ! leftresp
         if (lineresp) then
-          do axis = 3, 1, -1
+          axis_max = 3
+          if (multipole.gt.1) axis_max = 9
+          if (multipole.gt.2) axis_max = 19
+          do axis = axis_max, 1, -1
           if (respaxis(axis)) then
-            call deletefile(d_tr1(axis))
-            call deletefile(d_tr1(axis+3))
+            pos_offset = 0
+            neg_offset = 0
+            if (axis.gt.3 .and. axis.lt.10) then
+               pos_offset = 3
+               neg_offset = 6
+            else if (axis.ge.10) then
+               pos_offset = 9
+               neg_offset = 16
+            endif
+            call deletefile(d_tr1(axis+pos_offset))
+            call deletefile(d_tr1(axis+3+neg_offset))
             if (.not.ma_pop_stack(l_tr1_offset(axis)))
      1        call errquit("tce_energy: MA problem",86,MA_ERR)
           endif

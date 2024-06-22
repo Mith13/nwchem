@@ -505,6 +505,64 @@ c
         call util_file_name('tr1_8_copy',.false.,.false.,filename)
       elseif(axis.eq.9) then
         call util_file_name('tr1_9_copy',.false.,.false.,filename)
+      elseif(axis.eq.10) then
+        call util_file_name('tr1_10_copy',.false.,.false.,filename)
+      elseif(axis.eq.11) then
+        call util_file_name('tr1_11_copy',.false.,.false.,filename)
+      elseif(axis.eq.12) then
+        call util_file_name('tr1_12_copy',.false.,.false.,filename)
+      elseif(axis.eq.13) then
+        call util_file_name('tr1_13_copy',.false.,.false.,filename)
+      elseif(axis.eq.14) then
+        call util_file_name('tr1_14_copy',.false.,.false.,filename)
+      elseif(axis.eq.15) then
+        call util_file_name('tr1_15_copy',.false.,.false.,filename)
+      elseif(axis.eq.16) then
+        call util_file_name('tr1_16_copy',.false.,.false.,filename)
+      elseif(axis.eq.17) then
+        call util_file_name('tr1_17_copy',.false.,.false.,filename)
+      elseif(axis.eq.18) then
+        call util_file_name('tr1_18_copy',.false.,.false.,filename)
+      elseif(axis.eq.19) then
+        call util_file_name('tr1_19_copy',.false.,.false.,filename)
+      elseif(axis.eq.20) then
+        call util_file_name('tr1_20_copy',.false.,.false.,filename)
+      elseif(axis.eq.21) then
+        call util_file_name('tr1_21_copy',.false.,.false.,filename)
+      elseif(axis.eq.22) then
+        call util_file_name('tr1_22_copy',.false.,.false.,filename)
+      elseif(axis.eq.23) then
+        call util_file_name('tr1_23_copy',.false.,.false.,filename)
+      elseif(axis.eq.24) then
+        call util_file_name('tr1_24_copy',.false.,.false.,filename)
+      elseif(axis.eq.25) then
+        call util_file_name('tr1_25_copy',.false.,.false.,filename)
+      elseif(axis.eq.26) then
+        call util_file_name('tr1_26_copy',.false.,.false.,filename)
+      elseif(axis.eq.27) then
+        call util_file_name('tr1_27_copy',.false.,.false.,filename)
+      elseif(axis.eq.28) then
+        call util_file_name('tr1_28_copy',.false.,.false.,filename)
+      elseif(axis.eq.29) then
+        call util_file_name('tr1_29_copy',.false.,.false.,filename)
+      elseif(axis.eq.30) then
+        call util_file_name('tr1_30_copy',.false.,.false.,filename)
+      elseif(axis.eq.31) then
+        call util_file_name('tr1_31_copy',.false.,.false.,filename)
+      elseif(axis.eq.32) then
+        call util_file_name('tr1_32_copy',.false.,.false.,filename)
+      elseif(axis.eq.33) then
+        call util_file_name('tr1_33_copy',.false.,.false.,filename)
+      elseif(axis.eq.34) then
+        call util_file_name('tr1_34_copy',.false.,.false.,filename)
+      elseif(axis.eq.35) then
+        call util_file_name('tr1_35_copy',.false.,.false.,filename)
+      elseif(axis.eq.36) then
+        call util_file_name('tr1_36_copy',.false.,.false.,filename)
+      elseif(axis.eq.37) then
+        call util_file_name('tr1_37_copy',.false.,.false.,filename)
+      elseif(axis.eq.38) then
+        call util_file_name('tr1_38_copy',.false.,.false.,filename)
       else
         call errquit('tr1_restart_save: too many saved',axis,DISK_ERR)
       endif
@@ -983,6 +1041,64 @@ c
         call util_file_name('tr2_8_copy',.false.,.false.,filename)
       elseif(axis.eq.9) then
         call util_file_name('tr2_9_copy',.false.,.false.,filename)
+      elseif(axis.eq.10) then
+        call util_file_name('tr2_10_copy',.false.,.false.,filename)
+      elseif(axis.eq.11) then
+        call util_file_name('tr2_11_copy',.false.,.false.,filename)
+      elseif(axis.eq.12) then
+        call util_file_name('tr2_12_copy',.false.,.false.,filename)
+      elseif(axis.eq.13) then
+        call util_file_name('tr2_13_copy',.false.,.false.,filename)
+      elseif(axis.eq.14) then
+        call util_file_name('tr2_14_copy',.false.,.false.,filename)
+      elseif(axis.eq.15) then
+        call util_file_name('tr2_15_copy',.false.,.false.,filename)
+      elseif(axis.eq.16) then
+        call util_file_name('tr2_16_copy',.false.,.false.,filename)
+      elseif(axis.eq.17) then
+        call util_file_name('tr2_17_copy',.false.,.false.,filename)
+      elseif(axis.eq.18) then
+        call util_file_name('tr2_18_copy',.false.,.false.,filename)
+      elseif(axis.eq.19) then
+        call util_file_name('tr2_19_copy',.false.,.false.,filename)
+      elseif(axis.eq.20) then
+        call util_file_name('tr2_20_copy',.false.,.false.,filename)
+      elseif(axis.eq.21) then
+        call util_file_name('tr2_21_copy',.false.,.false.,filename)
+      elseif(axis.eq.22) then
+        call util_file_name('tr2_22_copy',.false.,.false.,filename)
+      elseif(axis.eq.23) then
+        call util_file_name('tr2_23_copy',.false.,.false.,filename)
+      elseif(axis.eq.24) then
+        call util_file_name('tr2_24_copy',.false.,.false.,filename)
+      elseif(axis.eq.25) then
+        call util_file_name('tr2_25_copy',.false.,.false.,filename)
+      elseif(axis.eq.26) then
+        call util_file_name('tr2_26_copy',.false.,.false.,filename)
+      elseif(axis.eq.27) then
+        call util_file_name('tr2_27_copy',.false.,.false.,filename)
+      elseif(axis.eq.28) then
+        call util_file_name('tr2_28_copy',.false.,.false.,filename)
+      elseif(axis.eq.29) then
+        call util_file_name('tr2_29_copy',.false.,.false.,filename)
+      elseif(axis.eq.30) then
+        call util_file_name('tr2_30_copy',.false.,.false.,filename)
+      elseif(axis.eq.31) then
+        call util_file_name('tr2_31_copy',.false.,.false.,filename)
+      elseif(axis.eq.32) then
+        call util_file_name('tr2_32_copy',.false.,.false.,filename)
+      elseif(axis.eq.33) then
+        call util_file_name('tr2_33_copy',.false.,.false.,filename)
+      elseif(axis.eq.34) then
+        call util_file_name('tr2_34_copy',.false.,.false.,filename)
+      elseif(axis.eq.35) then
+        call util_file_name('tr2_35_copy',.false.,.false.,filename)
+      elseif(axis.eq.36) then
+        call util_file_name('tr2_36_copy',.false.,.false.,filename)
+      elseif(axis.eq.37) then
+        call util_file_name('tr2_37_copy',.false.,.false.,filename)
+      elseif(axis.eq.38) then
+        call util_file_name('tr2_38_copy',.false.,.false.,filename)
       else
         call errquit('tr2_restart_save: too many saved',axis,DISK_ERR)
       endif
@@ -1815,6 +1931,64 @@ c
         call util_file_name('tr1_8_copy',.false.,.false.,filename)
       elseif(axis.eq.9) then
         call util_file_name('tr1_9_copy',.false.,.false.,filename)
+      elseif(axis.eq.10) then
+        call util_file_name('tr1_10_copy',.false.,.false.,filename)
+      elseif(axis.eq.11) then
+        call util_file_name('tr1_11_copy',.false.,.false.,filename)
+      elseif(axis.eq.12) then
+        call util_file_name('tr1_12_copy',.false.,.false.,filename)
+      elseif(axis.eq.13) then
+        call util_file_name('tr1_13_copy',.false.,.false.,filename)
+      elseif(axis.eq.14) then
+        call util_file_name('tr1_14_copy',.false.,.false.,filename)
+      elseif(axis.eq.15) then
+        call util_file_name('tr1_15_copy',.false.,.false.,filename)
+      elseif(axis.eq.16) then
+        call util_file_name('tr1_16_copy',.false.,.false.,filename)
+      elseif(axis.eq.17) then
+        call util_file_name('tr1_17_copy',.false.,.false.,filename)
+      elseif(axis.eq.18) then
+        call util_file_name('tr1_18_copy',.false.,.false.,filename)
+      elseif(axis.eq.19) then
+        call util_file_name('tr1_19_copy',.false.,.false.,filename)
+      elseif(axis.eq.20) then
+        call util_file_name('tr1_20_copy',.false.,.false.,filename)
+      elseif(axis.eq.21) then
+        call util_file_name('tr1_21_copy',.false.,.false.,filename)
+      elseif(axis.eq.22) then
+        call util_file_name('tr1_22_copy',.false.,.false.,filename)
+      elseif(axis.eq.23) then
+        call util_file_name('tr1_23_copy',.false.,.false.,filename)
+      elseif(axis.eq.24) then
+        call util_file_name('tr1_24_copy',.false.,.false.,filename)
+      elseif(axis.eq.25) then
+        call util_file_name('tr1_25_copy',.false.,.false.,filename)
+      elseif(axis.eq.26) then
+        call util_file_name('tr1_26_copy',.false.,.false.,filename)
+      elseif(axis.eq.27) then
+        call util_file_name('tr1_27_copy',.false.,.false.,filename)
+      elseif(axis.eq.28) then
+        call util_file_name('tr1_28_copy',.false.,.false.,filename)
+      elseif(axis.eq.29) then
+        call util_file_name('tr1_29_copy',.false.,.false.,filename)
+      elseif(axis.eq.30) then
+        call util_file_name('tr1_30_copy',.false.,.false.,filename)
+      elseif(axis.eq.31) then
+        call util_file_name('tr1_31_copy',.false.,.false.,filename)
+      elseif(axis.eq.32) then
+        call util_file_name('tr1_32_copy',.false.,.false.,filename)
+      elseif(axis.eq.33) then
+        call util_file_name('tr1_33_copy',.false.,.false.,filename)
+      elseif(axis.eq.34) then
+        call util_file_name('tr1_34_copy',.false.,.false.,filename)
+      elseif(axis.eq.35) then
+        call util_file_name('tr1_35_copy',.false.,.false.,filename)
+      elseif(axis.eq.36) then
+        call util_file_name('tr1_36_copy',.false.,.false.,filename)
+      elseif(axis.eq.37) then
+        call util_file_name('tr1_37_copy',.false.,.false.,filename)
+      elseif(axis.eq.38) then
+        call util_file_name('tr1_38_copy',.false.,.false.,filename)
       else
         call errquit('tr1_restart_read: cannot exist',axis,DISK_ERR)
       endif
@@ -2277,6 +2451,64 @@ c
         call util_file_name('tr2_8_copy',.false.,.false.,filename)
       elseif(axis.eq.9) then
         call util_file_name('tr2_9_copy',.false.,.false.,filename)
+      elseif(axis.eq.10) then
+        call util_file_name('tr2_10_copy',.false.,.false.,filename)
+      elseif(axis.eq.11) then
+        call util_file_name('tr2_11_copy',.false.,.false.,filename)
+      elseif(axis.eq.12) then
+        call util_file_name('tr2_12_copy',.false.,.false.,filename)
+      elseif(axis.eq.13) then
+        call util_file_name('tr2_13_copy',.false.,.false.,filename)
+      elseif(axis.eq.14) then
+        call util_file_name('tr2_14_copy',.false.,.false.,filename)
+      elseif(axis.eq.15) then
+        call util_file_name('tr2_15_copy',.false.,.false.,filename)
+      elseif(axis.eq.16) then
+        call util_file_name('tr2_16_copy',.false.,.false.,filename)
+      elseif(axis.eq.17) then
+        call util_file_name('tr2_17_copy',.false.,.false.,filename)
+      elseif(axis.eq.18) then
+        call util_file_name('tr2_18_copy',.false.,.false.,filename)
+      elseif(axis.eq.19) then
+        call util_file_name('tr2_19_copy',.false.,.false.,filename)
+      elseif(axis.eq.20) then
+        call util_file_name('tr2_20_copy',.false.,.false.,filename)
+      elseif(axis.eq.21) then
+        call util_file_name('tr2_21_copy',.false.,.false.,filename)
+      elseif(axis.eq.22) then
+        call util_file_name('tr2_22_copy',.false.,.false.,filename)
+      elseif(axis.eq.23) then
+        call util_file_name('tr2_23_copy',.false.,.false.,filename)
+      elseif(axis.eq.24) then
+        call util_file_name('tr2_24_copy',.false.,.false.,filename)
+      elseif(axis.eq.25) then
+        call util_file_name('tr2_25_copy',.false.,.false.,filename)
+      elseif(axis.eq.26) then
+        call util_file_name('tr2_26_copy',.false.,.false.,filename)
+      elseif(axis.eq.27) then
+        call util_file_name('tr2_27_copy',.false.,.false.,filename)
+      elseif(axis.eq.28) then
+        call util_file_name('tr2_28_copy',.false.,.false.,filename)
+      elseif(axis.eq.29) then
+        call util_file_name('tr2_29_copy',.false.,.false.,filename)
+      elseif(axis.eq.30) then
+        call util_file_name('tr2_30_copy',.false.,.false.,filename)
+      elseif(axis.eq.31) then
+        call util_file_name('tr2_31_copy',.false.,.false.,filename)
+      elseif(axis.eq.32) then
+        call util_file_name('tr2_32_copy',.false.,.false.,filename)
+      elseif(axis.eq.33) then
+        call util_file_name('tr2_33_copy',.false.,.false.,filename)
+      elseif(axis.eq.34) then
+        call util_file_name('tr2_34_copy',.false.,.false.,filename)
+      elseif(axis.eq.35) then
+        call util_file_name('tr2_35_copy',.false.,.false.,filename)
+      elseif(axis.eq.36) then
+        call util_file_name('tr2_36_copy',.false.,.false.,filename)
+      elseif(axis.eq.37) then
+        call util_file_name('tr2_37_copy',.false.,.false.,filename)
+      elseif(axis.eq.38) then
+        call util_file_name('tr2_38_copy',.false.,.false.,filename)
       else
         call errquit('tr2_restart_read: cannot exist',axis,DISK_ERR)
       endif

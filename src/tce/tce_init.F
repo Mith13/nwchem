@@ -524,11 +524,11 @@ c
      1    call errquit('tce_init: failed to write bnumfreq',0,RTDB_ERR)
       endif
 c
-      if (.not.rtdb_get(rtdb,'tce:respaxis',mt_log,3,respaxis)) then
-        respaxis(1) = .true.
-        respaxis(2) = .true.
-        respaxis(3) = .true.
-        if (.not.rtdb_put(rtdb,'tce:respaxis',mt_log,3,respaxis))
+      if (.not.rtdb_get(rtdb,'tce:respaxis',mt_log,19,respaxis)) then
+        do i=1,19
+            respaxis(i) = .true.
+        enddo
+        if (.not.rtdb_put(rtdb,'tce:respaxis',mt_log,19,respaxis))
      1    call errquit('tce_init: failed to write respaxis',0,RTDB_ERR)
       endif
 c
