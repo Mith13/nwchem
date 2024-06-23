@@ -373,7 +373,7 @@ c
      2      k_t2_offset,k_l1_offset,k_l2_offset)
           call reconcilefile(d_q0,1)
           call get_block(d_q0,cquadrupole,1,0)
-          quadrupole_cor(axis)=quadrupole_scf(axis)-cquadrupole
+          quadrupole_cor(axis)=quadrupole_scf(axis)+cquadrupole !fixed wrong sign
           if (nodezero.and.util_print('multipole',print_debug)) then
               write(LuOut,1002) axis,quadrupole_scf(axis),
      1                               quadrupole_cor(axis)

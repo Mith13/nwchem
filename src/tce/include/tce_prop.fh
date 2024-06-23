@@ -13,7 +13,7 @@ c
       double precision afreq(maxnumfreq)
       double precision bfreq(maxnumfreq)
       double precision gfreq(maxnumfreq)
-      logical respaxis(3)
+      logical respaxis(19)
       logical lineresp,leftresp,quadresp
       logical guess_lr_real,guess_qr_real
       logical nopolar,nohyper,nogamma

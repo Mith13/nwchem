@@ -52,7 +52,7 @@ OBJ_OPTIMIZE = tce_tile.o tce_ao1e.o tce_mo1e.o tce_ao2e.o \
       tce_mo2e_hybrid_2eorb_split.o tce_mo2e_offset_intorb_hybrid.o \
       tce_mo2e_2emet3.o tce_mo2e_2emet3_n5.o tce_mo2e_2emet4.o tce_mo2e_2emet4_n5.o \
       get_hash_block_ma.o \
-      ccsd_energy_loc.o cc2_energy.o ccsd_lambda.o ccsd_lr_alpha.o \
+      ccsd_energy_loc.o cc2_energy.o ccsd_lambda.o ccsd_lr_alpha.o ccsdt_lr_alpha.o ccsdtq_lr_alpha_run.o \
       ccsd_qr_beta.o tce_dgeev.o tce_schmidt.o tensor_read_write.o \
       tce_diis_act.o tce_mo2e_zones_4a_disk_ga_act.o tce_mo2e_zones_4a_disk_ga_chop_act.o \
       tce_t2a_offset.o tce_x2a_offset.o new_ga4ind_N5.o new4ind_N5_osu.o
@@ -95,7 +95,7 @@ USES_BLAS = tce_mbpt2.F tce_residual_t1.F tce_residual_t2.F \
             tce_mo2e_disk_2eorb.F tce_mo2e_incore_2eorb.F tce_mo2e_incore_2eorb_split.F \
             tce_mo2e_hybrid_2eorb_split.F \
             tce_diagnose_t1.F ddotfile.F tce_ao2e_cholesky.F tce_energy.F \
-            ccsd_lr_alpha.F tensor_read_write.F \
+            ccsd_lr_alpha.F ccsdt_lr_alpha.o ccsdtq_lr_alpha_run.o tensor_read_write.F \
             tce_diis_act.F tce_mo2e_zones_4a_disk_ga_act.F tce_mo2e_zones_4a_disk_ga_chop_act.F \
             ccsd_qr_beta.F daxpyfile.F tce_ao2e_cholesky_orb.F tce_ao2e_disk.F \
             tce_ao2e_new.F tce_dgeev.F tce_mo2e_disk.F tce_mo2e_new.F \

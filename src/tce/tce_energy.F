@@ -280,7 +280,8 @@ c
       integer l_o1_offset(10)   ! Offset for o1 integral file
       integer k_o1_offset(10)   ! Offset for o1 integral file
       integer size_o1(10)       ! File size in doubles
-      character*5 ofilename(10) ! File name stub
+      character*5 ofilename(10) ! File name stub 
+!CJL stub names were changed to correspond with proper names in tce_aoq1 and tce_ao1
       data ofilename/'o1xxx','o1xxy','o1xxz','o1xyy','o1xyz',
      &               'o1xzz','o1yyy','o1yyz','o1yzz','o1zzz'/
       character*3 axisname(19)  ! Axis
@@ -346,6 +347,11 @@ c
 !
 !     CC Response
 !
+
+!CJL I removed the imaginary parts as they are not used and presumably do not even work (see discussion in issue #.974)
+!    Due to the addition of quadrupole and octupole stubs all appropriate arrays had to go from 3 -> 19 (for residuals) 
+!    or 9 -> 38 (for freq. dependent stubs), If somebody fixes imaginary code then I suggest adding them at the end (i.e. 20,21,22 or 39,40,41)
+!    instead of the original place as it will require the least amount of work.
       character*6 rr1filename(19) ! File name stub
       data rr1filename/'rr1x  ','rr1y  ','rr1z  ',
      1                 'rr1xx ','rr1xy ','rr1xz ',
@@ -539,6 +545,7 @@ c     2                'tr4xi  ','tr4yi  ','tr4zi  ',
       double precision alphaevr(3)      ! Dipole polarizability tensor eigenvalues (real)
       double precision alphaevi(3)      ! Dipole polarizability tensor eigenvalues (imag)
       double precision aeigvec(3,3)     ! dummy dgeev eigenvectors
+      logical  noskip_pole      ! check if l-pole response is to be calculated
 !      integer iter             ! Iteration counter
 !
 !     Excited-state CI, CC, & MBPT
@@ -2328,12 +2335,15 @@ c
           endif
         endif
         if (lineresp) then
+! set axis_max to the number of cartesian components of l-pole integral
           axis_max = 3
           if (multipole.gt.1) axis_max = 9
           if (multipole.gt.2) axis_max = 19
           
           do axis = 1, axis_max
           if (respaxis(axis)) then
+! The pos_offset and neg_offset are used to properly offset the frequency dependent stubs and arrays (see a comment before the definition of "rr1filename" at the beginning of this file) 
+! The very same is done for double, triples and quadruples in the corresponding sections
             pos_offset = 0
             neg_offset = 0
             if (axis.gt.3 .and. axis.lt.10) then 
@@ -2372,10 +2382,9 @@ c
      1           k_tr1_offset(axis),size_tr1(axis),axis+pos_offset,
      2           handle_tr1(axis+3+neg_offset),irrep_x)
             endif
-            endif
             call gatoeaf(d_tr1(axis+3+neg_offset))
 
-            if ((nodezero.and.util_print('tr1',print_debug)).or. .true.)
+            if ((nodezero.and.util_print('tr1',print_debug)))
      1             then
               write(LuOut,*)
               write(LuOut,9440) axisname(axis),irrepname
@@ -2569,7 +2578,6 @@ c
      1          k_tr2_offset(axis),size_tr2(axis),axis+pos_offset,
      2          handle_tr2(axis+3+neg_offset),irrep_x)
             endif
-            endif
 
             call gatoeaf(d_tr2(axis+3+neg_offset))
 
@@ -2680,7 +2688,6 @@ c
             call tce_filename(tr3filename(axis+3+neg_offset),filename)
             call createfile(filename,d_tr3(axis+3+neg_offset),
      &           size_tr3(axis))
-            if (axis.lt.4) then !skip restart for quad and oct for now
             if (read_tr(4+3)) then 
               call tr3_restart_read(d_tr3(axis+3+neg_offset),
      1          k_tr3_offset(axis),size_tr3(axis),axis+3+neg_offset,
@@ -2689,7 +2696,6 @@ c
               call tr3_restart_read(d_tr3(axis+3+neg_offset),
      1          k_tr3_offset(axis),size_tr3(axis),axis+pos_offset,
      2          handle_tr3(axis+3+neg_offset),irrep_x)
-            endif
             endif
             call gatoeaf(d_tr3(axis+3+neg_offset))
 
@@ -2805,6 +2811,8 @@ c
      2          handle_tr4(axis+pos_offset),irrep_x)
             endif
             call gatoeaf(d_tr4(axis+pos_offset))
+
+            ! negative omega
             call tce_filename(tr4filename(axis+3+neg_offset),filename)
             call createfile(filename,d_tr4(axis+3+neg_offset),
      &           size_tr4(axis))
@@ -2816,7 +2824,6 @@ c
               call tr4_restart_read(d_tr4(axis+3+neg_offset),
      1          k_tr4_offset(axis),size_tr4(axis),axis+pos_offset,
      2          handle_tr4(axis+3+neg_offset),irrep_x)
-            endif
             endif
             call gatoeaf(d_tr4(axis+3+neg_offset))
           endif
@@ -3464,6 +3471,11 @@ c
         call errquit('CCSDLR not compiled (tce_energy.F)',0,CAPMIS_ERR)
 #else
           ! no need to pass d_a0 as argument here
+          noskip_pole = .false. ! check if user wants to calculate any dipole component if not skip
+          do axis=1,3
+              if (respaxis(axis)) noskip_pole = .true.
+          enddo
+          if (noskip_pole) then
           if (nodezero) write(LuOut,*) 'CCSDLR, dipole',d_a0
           call ccsd_lr_alpha(rtdb,d_d0,d_a0,d_f1,d_v2,d_d1,
      1         d_t1,d_t2,d_lambda1,d_lambda2,d_tr1,d_tr2,
@@ -3472,8 +3484,13 @@ c
      4         k_t1_offset,k_t2_offset,k_l1_offset,k_l2_offset,
      5         k_tr1_offset,k_tr2_offset,
      6         size_tr1,size_tr2,dipole_scf,dipole_cor,1)
-
+          endif
           if (multipole.gt.1) then
+            noskip_pole = .false. ! check if user wants to calculate any quadrupole component if not skip
+            do axis=4,9
+                if (respaxis(axis)) noskip_pole = .true.
+            enddo
+            if (noskip_pole) then
             if (nodezero) write(LuOut,*) 'CCSDLR, quadrupole',d_aq0
             call ccsd_lr_alpha(rtdb,d_q0,d_aq0,d_f1,d_v2,d_q1,
      1         d_t1,d_t2,d_lambda1,d_lambda2,d_tr1,d_tr2,
@@ -3482,9 +3499,15 @@ c
      4         k_t1_offset,k_t2_offset,k_l1_offset,k_l2_offset,
      5         k_tr1_offset,k_tr2_offset,
      6         size_tr1,size_tr2,quadrupole_scf,quadrupole_cor,2)
+            endif
           endif
 
           if (multipole.gt.2) then
+            noskip_pole = .false. ! check if user wants to calculate any octupole component if not skip
+            do axis=10,19
+                if (respaxis(axis)) noskip_pole = .true.
+            enddo
+            if (noskip_pole) then
             if (nodezero) write(LuOut,*) 'CCSDLR, octupole',d_ao0
             call ccsd_lr_alpha(rtdb,d_o0,d_aq0,d_f1,d_v2,d_o1,
      1         d_t1,d_t2,d_lambda1,d_lambda2,d_tr1,d_tr2,
@@ -3493,6 +3516,7 @@ c
      4         k_t1_offset,k_t2_offset,k_l1_offset,k_l2_offset,
      5         k_tr1_offset,k_tr2_offset,
      6         size_tr1,size_tr2,octupole_scf,octupole_cor,3)
+            endif
           endif
 #endif
         endif ! lineresp
@@ -4471,8 +4495,14 @@ c Tsource
 #if !defined(CCSDTLR)
       CALL ERRQUIT('CCSDTLR not compiled (tce_energy.F)',0,CAPMIS_ERR)
 #else
-! it would be better to move it to separate file similar to ccsd_lr_alpha.F
+!CJL it would be better to move it to separate file similar to ccsd_lr_alpha.F
+!CJL Done. It is in ccsdt_lr_alpha_run.F
 ! first start with dipole stuff
+         noskip_pole = .false. ! check if user wants to calculate any dipole component if not skip
+         do axis=1,3
+             if (respaxis(axis)) noskip_pole = .true.
+         enddo
+         if (noskip_pole) then
          if (nodezero) write(LuOut,*) 'CCSDTLR, dipole',d_a0
          call ccsdt_lr_alpha(rtdb,d_d0,d_a0,d_f1,d_v2,d_d1,
      1           d_t1,d_t2,d_t3,d_lambda1,d_lambda2,d_lambda3,
@@ -4483,7 +4513,13 @@ c Tsource
      5           k_l1_offset,k_l2_offset,k_l3_offset,
      6           k_tr1_offset,k_tr2_offset,k_tr3_offset,
      7           size_tr1,size_tr2,size_tr3,size_a0,1)
+         endif
           if (multipole.gt.1) then
+            noskip_pole = .false. ! check if user wants to calculate any quadrupole component if not skip
+            do axis=4,9
+                if (respaxis(axis)) noskip_pole = .true.
+            enddo
+            if (noskip_pole) then
             if (nodezero) write(LuOut,*) 'CCSDTLR, quadrupole',d_aq0
               call ccsdt_lr_alpha(rtdb,d_q0,d_aq0,d_f1,d_v2,d_q1,
      1           d_t1,d_t2,d_t3,d_lambda1,d_lambda2,d_lambda3,
@@ -4494,8 +4530,14 @@ c Tsource
      5           k_l1_offset,k_l2_offset,k_l3_offset,
      6           k_tr1_offset,k_tr2_offset,k_tr3_offset,
      7           size_tr1,size_tr2,size_tr3,size_aq0,2)
+            endif
           endif
           if (multipole.gt.2) then
+            noskip_pole = .false. ! check if user wants to calculate any octupole component if not skip
+            do axis=10,19
+                if (respaxis(axis)) noskip_pole = .true.
+            enddo
+            if (noskip_pole) then
             if (nodezero) write(LuOut,*) 'CCSDTLR, octupole',d_ao0
               call ccsdt_lr_alpha(rtdb,d_o0,d_ao0,d_f1,d_v2,d_o1,
      1           d_t1,d_t2,d_t3,d_lambda1,d_lambda2,d_lambda3,
@@ -4506,6 +4548,7 @@ c Tsource
      5           k_l1_offset,k_l2_offset,k_l3_offset,
      6           k_tr1_offset,k_tr2_offset,k_tr3_offset,
      7           size_tr1,size_tr2,size_tr3,size_ao0,3)
+            endif
           endif
 !
 #endif
@@ -5418,6 +5461,56 @@ c Tsource
      2                    dipole_cor(2),dipole_cor(2)*debye,
      3                    dipole_cor(3),dipole_cor(3)*debye,
      4                    dipole_cor_t ,dipole_cor_t*debye
+            if (multipole.gt.1) then
+             do axis=1,6
+               irrep_d=sym_abelian_axis(geom,axis)
+               call tce_filename('q0',filename)
+               call createfile(filename,d_q0,size_q0)
+               call ccsdtq_density1(d_q1(axis),d_q0,d_t1,d_t2,d_t3,d_t4,
+     1          d_lambda1,d_lambda2,d_lambda3,d_lambda4,
+     2          k_q1_offset(axis),k_q0_offset,k_t1_offset,k_t2_offset,
+     3          k_t3_offset,k_t4_offset,k_l1_offset,k_l2_offset,
+     4          k_l3_offset,k_l4_offset)
+               call reconcilefile(d_q0,size_q0)
+               call get_block(d_q0,cdipole,1,0)
+               quadrupole_cor(axis)=quadrupole_scf(axis)+cquadrupole
+               call deletefile(d_q0)
+             enddo
+                if (nodezero) write(LuOut,9432) "CCSDTQ","second",
+     1                    quadrupole_cor(1),quadrupole_cor(1)*buck,
+     2                    quadrupole_cor(2),quadrupole_cor(2)*buck,
+     3                    quadrupole_cor(3),quadrupole_cor(3)*buck,
+     3                    quadrupole_cor(4),quadrupole_cor(4)*buck,
+     3                    quadrupole_cor(5),quadrupole_cor(5)*buck,
+     3                    quadrupole_cor(6),quadrupole_cor(6)*buck
+            endif
+            if (multipole.gt.2) then
+             do axis=1,10
+               irrep_d=sym_abelian_axis(geom,axis)
+               call tce_filename('o0',filename)
+               call createfile(filename,d_o0,size_o0)
+               call ccsdtq_density1(d_o1(axis),d_o0,d_t1,d_t2,d_t3,d_t4,
+     1          d_lambda1,d_lambda2,d_lambda3,d_lambda4,
+     2          k_o1_offset(axis),k_o0_offset,k_t1_offset,k_t2_offset,
+     3          k_t3_offset,k_t4_offset,k_l1_offset,k_l2_offset,
+     4          k_l3_offset,k_l4_offset)
+               call reconcilefile(d_o0,size_o0)
+               call get_block(d_o0,cdipole,1,0)
+               octupole_cor(axis)=octupole_scf(axis)+coctupole
+               call deletefile(d_o0)
+             enddo
+             if (nodezero) write(LuOut,9433) "CCSDTQ","third",
+     1                 octupole_cor(1),octupole_cor(1)*octo,
+     2                 octupole_cor(2),octupole_cor(2)*octo,
+     3                 octupole_cor(3),octupole_cor(3)*octo,
+     3                 octupole_cor(4),octupole_cor(4)*octo,
+     3                 octupole_cor(5),octupole_cor(5)*octo,
+     3                 octupole_cor(6),octupole_cor(6)*octo,
+     3                 octupole_cor(7),octupole_cor(7)*octo,
+     3                 octupole_cor(8),octupole_cor(8)*octo,
+     3                 octupole_cor(9),octupole_cor(9)*octo,
+     3                 octupole_cor(10),octupole_cor(10)*octo
+            endif
 !            goto 100
             goto 2437
           endif
@@ -5468,6 +5561,11 @@ c Tsource
  2437   continue
         if (lineresp) then
 !
+         noskip_pole = .false. ! check if user wants to calculate any dipole component if not skip
+         do axis=1,3
+             if (respaxis(axis)) noskip_pole = .true.
+         enddo
+         if (noskip_pole) then
          if (nodezero) write(LuOut,*) 'CCSDTQLR, dipole',d_a0
            call  ccsdtq_lr_alpha_run(rtdb,d_d0,d_a0,d_f1,d_v2,d_d1,
      1           d_t1,d_t2,d_t3,d_t4,
@@ -5479,7 +5577,13 @@ c Tsource
      5           k_l1_offset,k_l2_offset,k_l3_offset,k_l4_offset,
      6           k_tr1_offset,k_tr2_offset,k_tr3_offset,k_tr4_offset,
      7           size_tr1,size_tr2,size_tr3,size_tr4,size_a0,1)
+        endif ! dipole
           if (multipole.gt.1) then
+            noskip_pole = .false. ! check if user wants to calculate any quadruupole component if not skip
+            do axis=4,9
+                if (respaxis(axis)) noskip_pole = .true.
+            enddo
+            if (noskip_pole) then
             if (nodezero) write(LuOut,*) 'CCSDTQLR, quadrupole',d_aq0
            call  ccsdtq_lr_alpha_run(rtdb,d_q0,d_aq0,d_f1,d_v2,d_q1,
      1           d_t1,d_t2,d_t3,d_t4,
@@ -5491,9 +5595,15 @@ c Tsource
      5           k_l1_offset,k_l2_offset,k_l3_offset,k_l4_offset,
      6           k_tr1_offset,k_tr2_offset,k_tr3_offset,k_tr4_offset,
      7           size_tr1,size_tr2,size_tr3,size_tr4,size_a0,2)
-          endif
+           endif
+          endif ! multipole > 1
           if (multipole.gt.2) then
-            if (nodezero) write(LuOut,*) 'CCSDTQLR, octupole',d_ao0
+           noskip_pole = .false. ! check if user wants to calculate any octupole component if not skip
+           do axis=10,19
+               if (respaxis(axis)) noskip_pole = .true.
+           enddo
+           if (noskip_pole) then
+           if (nodezero) write(LuOut,*) 'CCSDTQLR, octupole',d_ao0
            call  ccsdtq_lr_alpha_run(rtdb,d_o0,d_ao0,d_f1,d_v2,d_o1,
      1           d_t1,d_t2,d_t3,d_t4,
      1           d_lambda1,d_lambda2,d_lambda3,d_lambda4,
@@ -5504,7 +5614,8 @@ c Tsource
      5           k_l1_offset,k_l2_offset,k_l3_offset,k_l4_offset,
      6           k_tr1_offset,k_tr2_offset,k_tr3_offset,k_tr4_offset,
      7           size_tr1,size_tr2,size_tr3,size_tr4,size_a0,3)
-          endif
+           endif
+          endif ! multipole > 2
 !
         endif ! lineresp
 !

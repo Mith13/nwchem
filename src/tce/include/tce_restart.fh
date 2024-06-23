@@ -37,7 +37,8 @@ c
       integer handle_l1,handle_l2,handle_l3,handle_l4
       integer handle_x1,handle_x2,handle_x3,handle_x4
       integer handle_y1,handle_y2,handle_y3,handle_y4
-      integer handle_tr1(9),handle_tr2(9),handle_tr3(9),handle_tr4(9)
+      integer handle_tr1(38),handle_tr2(38)
+      integer handle_tr3(38),handle_tr4(38)
       integer handle_yr1(9),handle_yr2(9),handle_yr3(9),handle_yr4(9)
       integer handle_qb1(3),handle_qb2(3)
 c
